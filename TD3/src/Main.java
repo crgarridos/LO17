@@ -22,7 +22,7 @@ public class Main {
 				System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
 			}else{
 				System.out.println("Mot non trouvé, calcul prefixe ...");
-				List<String> candidats = lex.prefixe(mot, 80);
+				List<String> candidats = lex.prefixe(mot, 60);
 				if(candidats.isEmpty())
 					System.out.println("Echec du prefixe");
 				else

@@ -93,8 +93,11 @@ public class Lexique {
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
 		   String cle = (String) it.next();
+		   int prox = prox(mot, cle);
 		   
-		   if(prox(mot, cle) >= seuil){
+		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
+		   
+		   if(prox >= seuil){
 			   String valeur = (String) lexique.get(cle);
 			   list.add(valeur);
 		   }
@@ -110,8 +113,8 @@ public class Lexique {
 		if(m1.length() < seuilMin || m2.length() < seuilMin){
 			prox = 0;
 		}else{
-			int i =1;
-			while(m1.charAt(i) == m2.charAt(i) && i < Math.min(m1.length(), m2.length())){
+			int i = 0;
+			while(i < Math.min(m1.length(), m2.length()) && m1.charAt(i) == m2.charAt(i)){
 				++i;
 			}
 			prox = i * 100 / Math.max(m1.length(), m2.length());
