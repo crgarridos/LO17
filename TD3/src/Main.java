@@ -2,11 +2,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-
-
+//TESTER: ilste
 
 public class Main {
-	private static final String path_lexique = "filtreCorpus_30_03_2015.txt";
+	private static final String path_lexique = "test_lemmes.txt";
 
 	public static void main(String[] args) {
 		Lexique lex = new Lexique(path_lexique);
@@ -35,6 +34,7 @@ public class Main {
 				else{
 					System.out.println("Echec du prefixe, calcul lenvenshein ...");
 					List<String> candidatsLeven = lex.levenshtein(mot);
+
 					if(!candidatsLeven.isEmpty())
 						for(String lemme_candidat : candidatsLeven){
 							System.out.println("Lemme Leven candidat: "+lemme_candidat);
