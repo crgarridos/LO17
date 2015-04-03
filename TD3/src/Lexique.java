@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -43,5 +46,38 @@ public class Lexique {
 		}
 		
 		return null;
+	}
+	
+	public  List<String> prefixe(String mot, int seuil){
+		List<String> list = new ArrayList<>();
+		
+		Iterator<String> it = lexique.keySet().iterator();
+		while (it.hasNext()){
+		   String cle = (String) it.next();
+		   
+		   if(prox(mot, cle) >= seuil){
+			   String valeur = (String) lexique.get(cle);
+			   list.add(valeur);
+		   }
+		}
+		
+		return list;
+	}
+	
+	public int prox(String m1, String m2){
+		int prox;
+		int seuilMin = 3;
+		
+		if(m1.length() < seuilMin && m2.length() < seuilMin){
+			prox = 0;
+		}else{
+			int i =1;
+			while(m1.charAt(i) == m2.charAt(i) && i < Math.min(m1.length(), m2.length())){
+				++i;
+			}
+			prox = i * 100 / Math.max(m1.length(), m2.length());
+		}
+		
+		return prox;
 	}
 }
