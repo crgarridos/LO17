@@ -28,7 +28,7 @@ public class Lexique {
 		while (scanner.hasNextLine()) {
 		    String line = scanner.nextLine();
 		 
-		    System.out.println(line);
+//		    System.out.println(line);
 		    StringTokenizer st = new StringTokenizer(line, "\t");
 		    if(st.countTokens() == 2){
 		    	String mot = st.nextToken();
@@ -76,12 +76,15 @@ public class Lexique {
 	}
 
 	private int cout(Character x, Character y) {
-		if(x == null || y == null || !x.equals(y))
+		if(x == null || y == null)
 			return 1;
+		else if(!x.equals(y))
+			return 2;
 		else return 0;
 	}
 	
-	public  List<String> levenshtein(String mot, int seuil){
+	public  List<String> levenshtein(String mot){
+		int seuil = mot.length()/2;
 		List<String> list = new ArrayList<>();
 		
 		Iterator<String> it = lexique.keySet().iterator();
@@ -91,7 +94,7 @@ public class Lexique {
 		   
 		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
 		   
-		   if(prox >= seuil){
+		   if(prox <= seuil && prox >= seuil/2){
 			   String valeur = (String) lexique.get(cle);
 			   list.add(valeur);
 		   }
