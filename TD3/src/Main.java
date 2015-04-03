@@ -32,5 +32,6 @@ public class Main {
 				//String[] candidats = lex.levenshtein(mot);
 			}
 		}
+		in.close();
 	}
 }
