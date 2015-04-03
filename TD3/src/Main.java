@@ -16,7 +16,7 @@ public class Main {
 			String mot = (String) st.nextElement();
 			String lemme = lex.retrouve(mot.toLowerCase());
 //			if(lemme)
-			String[] candidats = lex.levenshtein(mot);
+//			String[] candidats = lex.levenshtein(mot);
 		}
 	}
 }

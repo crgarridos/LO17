@@ -48,10 +48,10 @@ public class Lexique {
 		return null;
 	}
 
-	public String[] levenshtein(String m1,String m2) {
+	public int levenshtein(String m1,String m2) {
 //		LevenshteinDistance(m A , m B )
 //			for i ← 0 to |m A |
-//				do dist[i, 0] = dist[i − 1, 0] + γ(X i , λ)
+//				do dist[i, 0] = dist[i − 1, 0] + γ(Xi , λ)
 //			for j ← 0 to |m B |
 //				do dist[0, j] = dist[0, j − 1] + γ(λ, Y i )
 //			for i ← 1 to |m A |
@@ -61,25 +61,26 @@ public class Lexique {
 //						d 3 = dist[i, j − 1] + γ(λ, Y j )
 //						dist[i, j] = min(d 1 , d 2 , d 3 )
 //			return dist[|m A |, |m B |]
-		int[][] dist = new int[m1.length()][m2.length()];
+		int[][] dist = new int[m1.length()+1][m2.length()+1];
 		for (int i = 0; i < m1.length(); i++)
-			dist[i][0] = dist[i-1][0] + cout(1);
+			dist[i][0] = dist[i-1][0] + cout(m1.charAt(i),null);
 		for (int j = 0; j < m1.length(); j++)
-			dist[0][j] = dist[0][j-1] + cout(1);
+			dist[0][j] = dist[0][j-1] + cout(null,m2.charAt(j));
 		for (int i = 0; i < m1.length(); i++) {
 			for (int j = 0; j < m1.length(); j++) {
-				int d1 = dist[i-1][j-1] + cout(1);
-				int d2 = dist[i-1][j-1] + cout(1);
-				int d3 = dist[i-1][j-1] + cout(1);
-				dist[0][j] = dist[0][j-1] + cout(1);
+				int d1 = dist[i-1][j-1] + cout(m1.charAt(i),m2.charAt(i));
+				int d2 = dist[i-1][j] + cout(m1.charAt(i),null);
+				int d3 = dist[i][j-1] + cout(null,m2.charAt(j));
+				dist[i][j] = Math.min(Math.min(d1, d2),d3);
 			}
 		}
-		return null;
+		return dist[m1.length()][m2.length()];
 	}
 
-	private int cout(int i) {
-		// TODO Stub de la méthode généré automatiquement
-		return 0;
+	private int cout(Character x, Character y) {
+		if(x == null || y == null || !x.equals(y))
+			return 0;
+		else return 1;
 	}
 	
 	
