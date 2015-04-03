@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Lexique lex = new Lexique(path_lexique);
-		System.out.println(lex.levenshtein("cat", "catcat"));
+//		System.out.println(lex.levenshtein("cat", "catcat"));
 		Scanner in = new Scanner(System.in);
 		String s = in.nextLine();
 		StringTokenizer st = new StringTokenizer(s," ");
@@ -23,15 +23,23 @@ public class Main {
 				System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
 			}else{
 				System.out.println("Mot non trouvé, calcul prefixe ...");
-				List<String> candidats = lex.prefixe(mot, 80);
-				if(candidats.isEmpty())
-					System.out.println("Echec du prefixe");
-				else
+				List<String> candidats = lex.prefixe(mot, 60);
+				if(!candidats.isEmpty())
 					for(String lemme_candidat : candidats){
 						System.out.println("Lemme candidat: "+lemme_candidat);
 					}
+				else{
+					System.out.println("Echec du prefixe, calcul lenvenshein ...");
+					List<String> candidatsLeven = lex.levenshtein(mot,10);
+					if(!candidatsLeven.isEmpty())
+						for(String lemme_candidat : candidats){
+							System.out.println("Lemme candidat: "+lemme_candidat);
+						}
+					else System.out.println("Echéc du levenshtein, Aucun mot trouvé");
+				}
 				//String[] candidats = lex.levenshtein(mot);
 			}
 		}
+		in.close();
 	}
 }

@@ -48,20 +48,7 @@ public class Lexique {
 		return null;
 	}
 
-	public int levenshtein(String m1,String m2) {
-//		LevenshteinDistance(m A , m B )
-//			for i ← 0 to |m A |
-//				do dist[i, 0] = dist[i − 1, 0] + γ(Xi , λ)
-//			for j ← 0 to |m B |
-//				do dist[0, j] = dist[0, j − 1] + γ(λ, Y i )
-//			for i ← 1 to |m A |
-//				do for j ← 1 to |m B |
-//					do d 1 = dist[i − 1, j − 1) + γ(X i , Y i )
-//						d 2 = dist[i − 1, j] + γ(X i , λ)
-//						d 3 = dist[i, j − 1] + γ(λ, Y j )
-//						dist[i, j] = min(d 1 , d 2 , d 3 )
-//			return dist[|m A |, |m B |]
-
+	public int levenshteinDistance(String m1,String m2) {
 		int[][] dist = new int[m1.length()+1][m2.length()+1];
 		dist[0][0]=0;
 		for (int i = 1; i <= m1.length(); i++)
@@ -72,19 +59,19 @@ public class Lexique {
 			
 		for (int i = 1; i <= m1.length(); i++) {
 			for (int j = 1; j <= m2.length(); j++) {
-				int d1 = dist[i-1][j-1] + cout(m1.charAt(i-1),m2.charAt(i-1));
+				int d1 = dist[i-1][j-1] + cout(m1.charAt(i-1),m2.charAt(j-1));
 				int d2 = dist[i-1][j] + cout(m1.charAt(i-1),null);
 				int d3 = dist[i][j-1] + cout(null,m2.charAt(j-1));
 				
 				dist[i][j] = Math.min(Math.min(d1, d2),d3);
 			}
 		}
-		for (int i = 0; i < m1.length(); i++) {
-			for (int j = 0; j < m2.length(); j++) {
-				System.out.print(dist[i][j]);
-			}
-			System.out.println();
-		}
+//		for (int i = 0; i < m1.length(); i++) {
+//			for (int j = 0; j < m2.length(); j++) {
+//				System.out.print(dist[i][j]);
+//			}
+//			System.out.println();
+//		}
 		return dist[m1.length()][m2.length()];
 	}
 
@@ -94,7 +81,24 @@ public class Lexique {
 		else return 0;
 	}
 	
-	
+	public  List<String> levenshtein(String mot, int seuil){
+		List<String> list = new ArrayList<>();
+		
+		Iterator<String> it = lexique.keySet().iterator();
+		while (it.hasNext()){
+		   String cle = (String) it.next();
+		   int prox = levenshteinDistance(mot, cle);
+		   
+		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
+		   
+		   if(prox >= seuil){
+			   String valeur = (String) lexique.get(cle);
+			   list.add(valeur);
+		   }
+		}
+		
+		return list;
+	}	
 	
 	
 	public  List<String> prefixe(String mot, int seuil){
@@ -103,8 +107,11 @@ public class Lexique {
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
 		   String cle = (String) it.next();
+		   int prox = prox(mot, cle);
 		   
-		   if(prox(mot, cle) >= seuil){
+		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
+		   
+		   if(prox >= seuil){
 			   String valeur = (String) lexique.get(cle);
 			   list.add(valeur);
 		   }
@@ -120,8 +127,8 @@ public class Lexique {
 		if(m1.length() < seuilMin || m2.length() < seuilMin){
 			prox = 0;
 		}else{
-			int i =1;
-			while(m1.charAt(i) == m2.charAt(i) && i < Math.min(m1.length(), m2.length())){
+			int i = 0;
+			while(i < Math.min(m1.length(), m2.length()) && m1.charAt(i) == m2.charAt(i)){
 				++i;
 			}
 			prox = i * 100 / Math.max(m1.length(), m2.length());
