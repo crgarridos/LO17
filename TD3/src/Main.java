@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -5,7 +6,7 @@ import java.util.StringTokenizer;
 
 
 public class Main {
-	private static final String path_lexique = "lexique.txt";
+	private static final String path_lexique = "filtreCorpus_30_03_2015.txt";
 
 	public static void main(String[] args) {
 		Lexique lex = new Lexique(path_lexique);
@@ -14,9 +15,22 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(s," ");
 		while(st.hasMoreElements()){
 			String mot = (String) st.nextElement();
-			String lemme = lex.retrouve(mot.toLowerCase());
-//			if(lemme)
-//			String[] candidats = lex.levenshtein(mot);
+
+			mot = mot.toLowerCase();
+			String lemme = lex.retrouve(mot);
+			if(lemme != null){
+				System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
+			}else{
+				System.out.println("Mot non trouvé, calcul prefixe ...");
+				List<String> candidats = lex.prefixe(mot, 80);
+				if(candidats.isEmpty())
+					System.out.println("Echec du prefixe");
+				else
+					for(String lemme_candidat : candidats){
+						System.out.println("Lemme candidat: "+lemme_candidat);
+					}
+				//String[] candidats = lex.levenshtein(mot);
+			}
 		}
 	}
 }

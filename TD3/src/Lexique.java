@@ -61,6 +61,7 @@ public class Lexique {
 //						d 3 = dist[i, j − 1] + γ(λ, Y j )
 //						dist[i, j] = min(d 1 , d 2 , d 3 )
 //			return dist[|m A |, |m B |]
+
 		int[][] dist = new int[m1.length()+1][m2.length()+1];
 		for (int i = 0; i < m1.length(); i++)
 			dist[i][0] = dist[i-1][0] + cout(m1.charAt(i),null);
@@ -106,7 +107,7 @@ public class Lexique {
 		int prox;
 		int seuilMin = 3;
 		
-		if(m1.length() < seuilMin && m2.length() < seuilMin){
+		if(m1.length() < seuilMin || m2.length() < seuilMin){
 			prox = 0;
 		}else{
 			int i =1;
