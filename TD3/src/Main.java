@@ -10,6 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Lexique lex = new Lexique(path_lexique);
+		System.out.println(lex.levenshtein("cat", "catcat"));
 		Scanner in = new Scanner(System.in);
 		String s = in.nextLine();
 		StringTokenizer st = new StringTokenizer(s," ");
