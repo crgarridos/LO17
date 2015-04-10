@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -33,11 +34,11 @@ public class Main {
 						}
 					else{
 						System.out.println("Echec du prefixe, calcul lenvenshein ...");
-						List<String> candidatsLeven = lex.levenshtein(mot);
+						HashMap<String, Integer> candidatsLeven = lex.levenshtein(mot);
 	
 						if(!candidatsLeven.isEmpty())
-							for(String lemme_candidat : candidatsLeven){
-								System.out.println("Lemme Leven candidat: "+lemme_candidat);
+							for(String candidat : candidatsLeven.keySet()){
+								System.out.println("Lemme Leven candidat: "+candidat + " - score: " + candidatsLeven.get(candidat));
 							}
 						else System.out.println("Echéc du levenshtein, Aucun mot trouvé");
 					}

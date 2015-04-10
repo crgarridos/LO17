@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -83,38 +84,61 @@ public class Lexique {
 		else return 0;
 	}
 	
-	public  List<String> levenshtein(String mot){
-		HashMap<String,Integer> mots = new HashMap<String,Integer>(); 
+	public  HashMap<String, Integer> levenshtein(String mot){
+		HashMap<String,Integer> hash = new HashMap<String,Integer>(); 
 		
 		int lengthMin = 3;
-		if(mot.length() < lengthMin) return new ArrayList<>();
+		if(mot.length() < lengthMin) return hash;
 		
-		int seuil = mot.length()/2;
+		int seuil = mot.length()*75/100;
 		for(String cle : lexique.keySet()){
 			if(cle.length() < lengthMin)
 				continue;
 			int prox = levenshteinDistance(mot, cle);		   
 			if(prox <= seuil){// && prox >= seuil/2){
 			   String valeur = (String) lexique.get(cle);
-			   mots.put(valeur,prox);
+			   hash.put(valeur,prox);
 			}
 		}
-		mots = sortByProx(mots);
+		hash = sortMotsByProx(hash);
 		
-		List<String> uniques = new ArrayList<String>();
-		for(String s : mots.keySet()){
-			if(!uniques.contains(s))
-				uniques.add(s);
+//		List<String> mots = new ArrayList<>(hash.keySet()); 
+//		List<Integer> proxs = new ArrayList<>(hash.values()); 
+//		
+//		for (int i = 0; i < proxs.size(); i++) {
+//			for (int j = 0; j < proxs.size(); j++) {
+//				if(proxs.get(i) < proxs.get(j)){
+//					int p = proxs.get(i);
+//					proxs.set(i,proxs.get(j));
+//					proxs.set(j,p);
+//					String m = mots.get(i);
+//					mots.set(i,mots.get(j));
+//					mots.set(j,m);
+//				}
+//			}
+//		}
+//		
+//		
+//		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
+//		for (int i = 0; i < mots.size(); i++)
+//			newHash.put(mots.get(i), proxs.get(i));
+//		
+		
+		HashMap<String,Integer> uniques = new HashMap<String,Integer>();
+		for(Entry<String, Integer> entry : hash.entrySet()) {		
+		    if(!uniques.containsKey(entry.getKey()))
+				uniques.put(entry.getKey(),entry.getValue());
 		}
 		return uniques;
 	}	
 	
-	private HashMap<String, Integer> sortByProx(HashMap<String, Integer> hash) {
+	private HashMap<String, Integer> sortMotsByProx(final HashMap<String, Integer> hash) {
 		List<String> mots = new ArrayList<>(hash.keySet()); 
 		List<Integer> proxs = new ArrayList<>(hash.values()); 
-		for (int i = 0; i < proxs.size()-1; i++) {
-			for (int j = 1; j < proxs.size()-i; j++) {
-				if(proxs.get(j-1) > proxs.get(j)){
+		
+		for (int i = 0; i < proxs.size(); i++) {
+			for (int j = 0; j < proxs.size(); j++) {
+				if(proxs.get(i) < proxs.get(j)){
 					int p = proxs.get(i);
 					proxs.set(i,proxs.get(j));
 					proxs.set(j,p);
@@ -125,8 +149,15 @@ public class Lexique {
 			}
 		}
 		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
-		for (int i = 0; i < mots.size(); i++)
-			newHash.put(mots.get(i), proxs.get(i));
+//		for (int i = 0; i < mots.size(); i++)
+//			newHash.put(mots.get(i), proxs.get(i));
+
+		Iterator<String> i1 = mots.iterator();
+		Iterator<Integer> i2 = proxs.iterator();
+		while (i1.hasNext() && i2.hasNext()) {
+			newHash.put(i1.next(), i2.next());
+		}
+		
 		return newHash;
 	}
 	
