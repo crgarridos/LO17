@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Lexique {
 		while (scanner.hasNextLine()) {
 		    String line = scanner.nextLine();
 		 
-		    System.out.println(line);
+//		    System.out.println(line);
 		    StringTokenizer st = new StringTokenizer(line, "\t");
 		    if(st.countTokens() == 2){
 		    	String mot = st.nextToken();
@@ -83,9 +85,12 @@ public class Lexique {
 		else return 0;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public  List<String> levenshtein(String mot){
 		int seuil = mot.length()/2;
-		List<String> list = new ArrayList<>();
+
+		List<String> mots = new ArrayList<>();
+		List<Integer> proxs = new ArrayList<>(); 
 		
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
@@ -96,11 +101,29 @@ public class Lexique {
 		   
 		   if(prox <= seuil && prox >= seuil/2){
 			   String valeur = (String) lexique.get(cle);
-			   list.add(valeur);
+			   mots.add(valeur);
+			   proxs.add(prox);
 		   }
 		}
 		
-		return list;
+		for (int i = 0; i < proxs.size(); i++) {
+			for (int j = 0; j < proxs.size(); j++) {
+				if(proxs.get(i)<proxs.get(j)){
+					int p = proxs.get(i);
+					proxs.set(i,proxs.get(j));
+					proxs.set(j,p);
+					String m = mots.get(i);
+					mots.set(i,mots.get(j));
+					mots.set(j,m);
+				}
+			}
+		}
+		List<String> uniques = new ArrayList<String>();
+		for(String s : mots){
+			if(!uniques.contains(s))
+				uniques.add(s);
+		}
+		return uniques;
 	}	
 	
 	
