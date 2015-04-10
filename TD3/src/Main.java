@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -34,7 +35,7 @@ public class Main {
 						}
 					else{
 						System.out.println("Echec du prefixe, calcul lenvenshein ...");
-						HashMap<String, Integer> candidatsLeven = lex.levenshtein(mot);
+						Map<String, Integer> candidatsLeven = lex.levenshtein(mot);
 	
 						if(!candidatsLeven.isEmpty())
 							for(String candidat : candidatsLeven.keySet()){

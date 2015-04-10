@@ -1,8 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -84,8 +88,8 @@ public class Lexique {
 		else return 0;
 	}
 	
-	public  HashMap<String, Integer> levenshtein(String mot){
-		HashMap<String,Integer> hash = new HashMap<String,Integer>(); 
+	public  Map<String, Integer> levenshtein(String mot){
+		Map<String,Integer> hash = new HashMap<String,Integer>(); 
 		
 		int lengthMin = 3;
 		if(mot.length() < lengthMin) return hash;
@@ -96,11 +100,12 @@ public class Lexique {
 				continue;
 			int prox = levenshteinDistance(mot, cle);		   
 			if(prox <= seuil){// && prox >= seuil/2){
-			   String valeur = (String) lexique.get(cle);
+			   String valeur = lexique.get(cle);
 			   hash.put(valeur,prox);
 			}
 		}
-		hash = sortMotsByProx(hash);
+		//hash = sortMotsByProx(hash);
+		hash = sortByValue(hash);
 		
 //		List<String> mots = new ArrayList<>(hash.keySet()); 
 //		List<Integer> proxs = new ArrayList<>(hash.values()); 
@@ -131,6 +136,24 @@ public class Lexique {
 		}
 		return uniques;
 	}	
+	
+	public static Map<String, Integer> sortByValue(Map<String, Integer> unsortMap) {	 
+		List<Map.Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(unsortMap.entrySet());
+	 
+		Collections.sort(list, new Comparator() {
+			public int compare(Object o1, Object o2) {
+				return ((Map.Entry<String, Integer>) (o1)).getValue()
+							.compareTo(((Map.Entry<String, Integer>) (o2)).getValue());
+			}
+		});
+	 
+		Map<String, Integer> sortedMap = new LinkedHashMap<>();
+		for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext();) {
+			Map.Entry<String, Integer> entry = it.next();
+			sortedMap.put(entry.getKey(), entry.getValue());
+		}
+		return sortedMap;
+	}
 	
 	private HashMap<String, Integer> sortMotsByProx(final HashMap<String, Integer> hash) {
 		List<String> mots = new ArrayList<>(hash.keySet()); 
@@ -166,13 +189,13 @@ public class Lexique {
 		
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
-		   String cle = (String) it.next();
+		   String cle = it.next();
 		   int prox = prox(mot, cle);
 		   
 		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
 		   
 		   if(prox >= seuil){
-			   String valeur = (String) lexique.get(cle);
+			   String valeur = lexique.get(cle);
 			   list.add(valeur);
 		   }
 		}
