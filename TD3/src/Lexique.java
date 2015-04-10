@@ -28,7 +28,7 @@ public class Lexique {
 		while (scanner.hasNextLine()) {
 		    String line = scanner.nextLine();
 		 
-//		    System.out.println(line);
+		    System.out.println(line);
 		    StringTokenizer st = new StringTokenizer(line, "\t");
 		    if(st.countTokens() == 2){
 		    	String mot = st.nextToken();

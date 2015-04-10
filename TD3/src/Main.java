@@ -12,7 +12,7 @@ public class Main {
 		System.out.println(lex.levenshteinDistance("cat", "catcat"));
 		System.out.println(lex.levenshteinDistance("OSLO", "SNOW"));
 		System.out.println(lex.levenshteinDistance("événement", "événmmement"));
-//		System.out.println(lex.levenshtein("cat", "catcat"));
+		System.out.println(lex.levenshteinDistance("grande", "graned"));
 
 		Scanner in = new Scanner(System.in);
 		String s = in.nextLine();
