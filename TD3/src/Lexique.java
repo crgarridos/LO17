@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,16 +52,16 @@ public class Lexique {
 		int[][] dist = new int[m1.length()+1][m2.length()+1];
 		dist[0][0]=0;
 		for (int i = 1; i <= m1.length(); i++)
-			dist[i][0] = dist[i-1][0] + cout(m1.charAt(i-1),null);
+			dist[i][0] = dist[i-1][0] + coutLevenshein(m1.charAt(i-1),null);
 			
 		for (int j = 1; j <= m2.length(); j++)
-			dist[0][j] = dist[0][j-1] + cout(null,m2.charAt(j-1));
+			dist[0][j] = dist[0][j-1] + coutLevenshein(null,m2.charAt(j-1));
 			
 		for (int i = 1; i <= m1.length(); i++) {
 			for (int j = 1; j <= m2.length(); j++) {
-				int d1 = dist[i-1][j-1] + cout(m1.charAt(i-1),m2.charAt(j-1));
-				int d2 = dist[i-1][j] + cout(m1.charAt(i-1),null);
-				int d3 = dist[i][j-1] + cout(null,m2.charAt(j-1));
+				int d1 = dist[i-1][j-1] + coutLevenshein(m1.charAt(i-1),m2.charAt(j-1));
+				int d2 = dist[i-1][j] + coutLevenshein(m1.charAt(i-1),null);
+				int d3 = dist[i][j-1] + coutLevenshein(null,m2.charAt(j-1));
 				
 				dist[i][j] = Math.min(Math.min(d1, d2),d3);
 			}
@@ -77,7 +75,7 @@ public class Lexique {
 		return dist[m1.length()][m2.length()];
 	}
 
-	private int cout(Character x, Character y) {
+	private int coutLevenshein(Character x, Character y) {
 		if(x == null || y == null)
 			return 1;
 		else if(!x.equals(y))
@@ -85,30 +83,38 @@ public class Lexique {
 		else return 0;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public  List<String> levenshtein(String mot){
+		HashMap<String,Integer> mots = new HashMap<String,Integer>(); 
+		
+		int lengthMin = 3;
+		if(mot.length() < lengthMin) return new ArrayList<>();
+		
 		int seuil = mot.length()/2;
-
-		List<String> mots = new ArrayList<>();
-		List<Integer> proxs = new ArrayList<>(); 
-		
-		Iterator<String> it = lexique.keySet().iterator();
-		while (it.hasNext()){
-		   String cle = (String) it.next();
-		   int prox = levenshteinDistance(mot, cle);
-		   
-		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
-		   
-		   if(prox <= seuil && prox >= seuil/2){
+		for(String cle : lexique.keySet()){
+			if(cle.length() < lengthMin)
+				continue;
+			int prox = levenshteinDistance(mot, cle);		   
+			if(prox <= seuil){// && prox >= seuil/2){
 			   String valeur = (String) lexique.get(cle);
-			   mots.add(valeur);
-			   proxs.add(prox);
-		   }
+			   mots.put(valeur,prox);
+			}
 		}
+		mots = sortByProx(mots);
 		
-		for (int i = 0; i < proxs.size(); i++) {
-			for (int j = 0; j < proxs.size(); j++) {
-				if(proxs.get(i)<proxs.get(j)){
+		List<String> uniques = new ArrayList<String>();
+		for(String s : mots.keySet()){
+			if(!uniques.contains(s))
+				uniques.add(s);
+		}
+		return uniques;
+	}	
+	
+	private HashMap<String, Integer> sortByProx(HashMap<String, Integer> hash) {
+		List<String> mots = new ArrayList<>(hash.keySet()); 
+		List<Integer> proxs = new ArrayList<>(hash.values()); 
+		for (int i = 0; i < proxs.size()-1; i++) {
+			for (int j = 1; j < proxs.size()-i; j++) {
+				if(proxs.get(j-1) > proxs.get(j)){
 					int p = proxs.get(i);
 					proxs.set(i,proxs.get(j));
 					proxs.set(j,p);
@@ -118,14 +124,11 @@ public class Lexique {
 				}
 			}
 		}
-		List<String> uniques = new ArrayList<String>();
-		for(String s : mots){
-			if(!uniques.contains(s))
-				uniques.add(s);
-		}
-		return uniques;
-	}	
-	
+		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
+		for (int i = 0; i < mots.size(); i++)
+			newHash.put(mots.get(i), proxs.get(i));
+		return newHash;
+	}
 	
 	public  List<String> prefixe(String mot, int seuil){
 		List<String> list = new ArrayList<>();

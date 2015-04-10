@@ -14,7 +14,7 @@ public class Main {
 		System.out.println(lex.levenshteinDistance("événement", "événmmement"));
 		System.out.println(lex.levenshteinDistance("grande", "graned"));
 		Scanner in = new Scanner(System.in);
-//		while(true){
+		while(true){
 			String s = in.nextLine();
 			StringTokenizer st = new StringTokenizer(s," ");
 			while(st.hasMoreElements()){
@@ -44,7 +44,7 @@ public class Main {
 					//String[] candidats = lex.levenshtein(mot);
 				}
 			}
-		
-		in.close();
+		}
+//		in.close();
 	}
 }
