@@ -1,4 +1,5 @@
-grammar Tal_simple;
+grammar tal_questions;
+
 NOM : 'Pierre' | 'Marie' | 'bananes' | 'pommes'
 ;
 VERBE : 'mange' | 'mangent'
@@ -12,6 +13,7 @@ CONJ : 'et' | 'ou'
 POINT : '.'
 ;
 WS  : (' ' |'\t' | '\r') {skip();} | '\n'  ;
+
 
 listephrases returns [String arbresort = ""]
 @init        {Arbre p;}:
@@ -77,6 +79,3 @@ gv returns [Arbre legv = new Arbre("GV")]
                 legv.ajouteFils(gnc);
         })?
 ;
-
-
-
