@@ -34,8 +34,7 @@ public class Lexique {
 		
 		// On boucle sur chaque champ detecté
 		while (scanner.hasNextLine()) {
-		    String line = scanner.nextLine();
-		 
+		    String line = scanner.nextLine(); 
 //		    System.out.println(line);
 		    StringTokenizer st = new StringTokenizer(line, "\t");
 		    if(st.countTokens() == 2){
@@ -78,7 +77,6 @@ public class Lexique {
 		if(lexique.containsKey(mot)){
 			return lexique.get(mot);
 		}
-		
 		return null;
 	}
 
@@ -117,7 +115,7 @@ public class Lexique {
 		else return 0;
 	}
 	
-	public  Map<String, Integer> levenshtein(String mot){
+	public  Map<String, Integer> levenshtein(String mot, int index){
 		Map<String,Integer> hash = new HashMap<String,Integer>(); 
 		
 		int lengthMin = 3;
@@ -127,36 +125,14 @@ public class Lexique {
 		for(String cle : lexique.keySet()){
 			if(cle.length() < lengthMin)
 				continue;
-			int prox = levenshteinDistance(mot, cle);		   
+			int poids = getPoids(cle,index);
+			int prox = levenshteinDistance(mot, cle) - poids;
 			if(prox <= seuil){// && prox >= seuil/2){
 			   String valeur = lexique.get(cle);
 			   hash.put(valeur,prox);
 			}
 		}
 		//hash = sortMotsByProx(hash);
-		hash = sortByValue(hash);
-		
-//		List<String> mots = new ArrayList<>(hash.keySet()); 
-//		List<Integer> proxs = new ArrayList<>(hash.values()); 
-//		
-//		for (int i = 0; i < proxs.size(); i++) {
-//			for (int j = 0; j < proxs.size(); j++) {
-//				if(proxs.get(i) < proxs.get(j)){
-//					int p = proxs.get(i);
-//					proxs.set(i,proxs.get(j));
-//					proxs.set(j,p);
-//					String m = mots.get(i);
-//					mots.set(i,mots.get(j));
-//					mots.set(j,m);
-//				}
-//			}
-//		}
-//		
-//		
-//		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
-//		for (int i = 0; i < mots.size(); i++)
-//			newHash.put(mots.get(i), proxs.get(i));
-//		
 		
 		HashMap<String,Integer> uniques = new HashMap<String,Integer>();
 		for(Entry<String, Integer> entry : hash.entrySet()) {		
@@ -164,62 +140,15 @@ public class Lexique {
 				uniques.put(entry.getKey(),entry.getValue());
 		}
 		return uniques;
-	}	
-	
-	public static Map<String, Integer> sortByValue(Map<String, Integer> unsortMap) {	 
-		List<Map.Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(unsortMap.entrySet());
-	 
-		Collections.sort(list, new Comparator() {
-			public int compare(Object o1, Object o2) {
-				return ((Map.Entry<String, Integer>) (o1)).getValue()
-							.compareTo(((Map.Entry<String, Integer>) (o2)).getValue());
-			}
-		});
-	 
-		Map<String, Integer> sortedMap = new LinkedHashMap<>();
-		for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext();) {
-			Map.Entry<String, Integer> entry = it.next();
-			sortedMap.put(entry.getKey(), entry.getValue());
-		}
-		return sortedMap;
 	}
 	
-	private HashMap<String, Integer> sortMotsByProx(final HashMap<String, Integer> hash) {
-		List<String> mots = new ArrayList<>(hash.keySet()); 
-		List<Integer> proxs = new ArrayList<>(hash.values()); 
-		
-		for (int i = 0; i < proxs.size(); i++) {
-			for (int j = 0; j < proxs.size(); j++) {
-				if(proxs.get(i) < proxs.get(j)){
-					int p = proxs.get(i);
-					proxs.set(i,proxs.get(j));
-					proxs.set(j,p);
-					String m = mots.get(i);
-					mots.set(i,mots.get(j));
-					mots.set(j,m);
-				}
-			}
-		}
-		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
-//		for (int i = 0; i < mots.size(); i++)
-//			newHash.put(mots.get(i), proxs.get(i));
-
-		Iterator<String> i1 = mots.iterator();
-		Iterator<Integer> i2 = proxs.iterator();
-		while (i1.hasNext() && i2.hasNext()) {
-			newHash.put(i1.next(), i2.next());
-		}
-		
-		return newHash;
-	}
-	
-	public  List<String> prefixe(String mot, int seuil){
+	public  List<String> prefixe(String mot, int seuil, int index){
 		List<String> list = new ArrayList<>();
 		
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
 		   String cle = it.next();
-		   int prox = prox(mot, cle);
+		   int prox = prox(mot, cle) + getPoids(cle,index);
 		   
 		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
 		   
@@ -232,6 +161,14 @@ public class Lexique {
 		return list;
 	}
 	
+	private int getPoids(String cle, int index) {
+		
+		if(poids.containsKey(cle) && poids.get(cle).getFirst().equals(new Integer(index))){
+			return poids.get(cle).getSecond();
+		}
+		return 0;
+	}
+
 	public int prox(String m1, String m2){
 		int prox;
 		int seuilMin = 3;

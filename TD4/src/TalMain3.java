@@ -33,17 +33,20 @@ public class TalMain3 {
 			String sanitizedSentence = "";
 			
 			StringTokenizer st = new StringTokenizer(stoppedSentence," ");
+			int i = 0;
 			while(st.hasMoreElements()){
 				String mot = (String) st.nextElement();
 	
 				mot = mot.toLowerCase();
+				int index = i++;
+				System.out.println(index);
 				String lemme = lex.retrouve(mot);
 				if(lemme != null){
 					System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
 					sanitizedSentence+=lemme+" ";
 				}else{
 					//System.out.println("Mot non trouvé, calcul prefixe ...");
-					List<String> candidats = lex.prefixe(mot, 60);
+					List<String> candidats = lex.prefixe(mot, 60, index);
 					if(!candidats.isEmpty()){
 						for(String lemme_candidat : candidats){
 							//System.out.println("Lemme prefix candidat: "+lemme_candidat);
@@ -52,7 +55,7 @@ public class TalMain3 {
 					}
 					else{
 						//System.out.println("Echec du prefixe, calcul lenvenshein ...");
-						Map<String, Integer> candidatsLeven = lex.levenshtein(mot);
+						Map<String, Integer> candidatsLeven = lex.levenshtein(mot,index);
 	
 						if(!candidatsLeven.isEmpty()){
 							for(String candidat : candidatsLeven.keySet()){
