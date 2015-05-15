@@ -94,12 +94,7 @@ public class Lexique {
 				dist[i][j] = Math.min(Math.min(d1, d2),d3);
 			}
 		}
-//		for (int i = 0; i < m1.length(); i++) {
-//			for (int j = 0; j < m2.length(); j++) {
-//				System.out.print(dist[i][j]);
-//			}
-//			System.out.println();
-//		}
+
 		return dist[m1.length()][m2.length()];
 	}
 
@@ -147,7 +142,7 @@ public class Lexique {
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
 		   String cle = it.next();
-		   int prox = prox(mot, cle) + getPoids(cle,index);
+		   int prox = prox(mot, cle);
 		   
 		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
 		   
