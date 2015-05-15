@@ -106,7 +106,7 @@ date returns [Arbre date_arbre = new Arbre("")] :
 		| ANNEE
 			{
 				date_arbre.ajouteFils(new Arbre("","annee"));
-			})+
+			})
 ;
 
 params returns [Arbre les_pars_arbre = new Arbre("")]
