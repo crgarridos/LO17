@@ -132,13 +132,13 @@ public class Lexique {
 			   hash.put(valeur,prox);
 			}
 		}
-		//hash = sortMotsByProx(hash);
 		
-		HashMap<String,Integer> uniques = new HashMap<String,Integer>();
+		Map<String,Integer> uniques = new HashMap<String,Integer>();
 		for(Entry<String, Integer> entry : hash.entrySet()) {		
 		    if(!uniques.containsKey(entry.getKey()))
 				uniques.put(entry.getKey(),entry.getValue());
 		}
+		uniques = SortMapByValue.sortByComparator(uniques, SortMapByValue.DESC);
 		return uniques;
 	}
 	
