@@ -46,16 +46,20 @@ public class TalMain3 {
 					sanitizedSentence+=lemme+" ";
 				}else{
 					//System.out.println("Mot non trouvé, calcul prefixe ...");
-					Map<String, Integer> candidats = lex.prefixe(mot, 60, index);
-					if(!candidats.isEmpty()){
-						/*for(String lemme_candidat : candidats){
+					Map<String, Integer> candidatsPrefixe = lex.prefixe(mot, 60, index);
+					Map<String, Integer> candidatsLeven = lex.levenshtein(mot,index);
+					
+					sanitizedSentence+= lex.comparePrefixeLevensthein(candidatsPrefixe, candidatsLeven)+" ";
+					
+					/*if(!candidats.isEmpty()){
+						for(String lemme_candidat : candidats){
 							//System.out.println("Lemme prefix candidat: "+lemme_candidat);
 						}
-						sanitizedSentence+=candidats.get(0)+" ";*/
+						sanitizedSentence+=candidats.get(0)+" ";
 					}
 					else{
 						//System.out.println("Echec du prefixe, calcul lenvenshein ...");
-						Map<String, Integer> candidatsLeven = lex.levenshtein(mot,index);
+						
 	
 						if(!candidatsLeven.isEmpty()){
 							for(String candidat : candidatsLeven.keySet()){
@@ -66,7 +70,7 @@ public class TalMain3 {
 						else{
 							System.out.println("Echéc du levenshtein, Aucun mot trouvé");
 						}
-					}
+					}*/
 					//String[] candidats = lex.levenshtein(mot);
 				}
 			}

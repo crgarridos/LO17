@@ -246,7 +246,6 @@ public class Lexique {
 		
 		Pair<String, Integer> pair = new Pair<>(cle, index);
 		if(poids.containsKey(pair)){
-			System.out.println("poids:"+poids.get(pair));
 			return poids.get(pair);
 		}
 		return 0;
