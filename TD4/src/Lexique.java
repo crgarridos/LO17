@@ -17,10 +17,13 @@ import java.util.StringTokenizer;
 public class Lexique {
 	
 	protected Map<String, String> lexique;
+	protected Map<String, Pair<Integer, Integer>> poids;
+
 	
-	public Lexique(String filePath){
+	public Lexique(String filePath, String poidsPath){
 		this.lexique = new HashMap<String, String>();
 		
+		//Lemmes
 		Scanner scanner;
 		try {
 			scanner = new Scanner(new File(filePath));
@@ -39,6 +42,32 @@ public class Lexique {
 		    	String mot = st.nextToken();
 		    	String lemme = st.nextToken();
 		    	this.lexique.put(mot, lemme);
+		    }
+		}
+		
+		scanner.close();
+		
+		this.poids = new HashMap<String, Pair<Integer, Integer>>();
+		
+		//Poids des lemmes
+		try {
+			scanner = new Scanner(new File(poidsPath));
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			return;
+		}
+		
+		// On boucle sur chaque champ detecté
+		while (scanner.hasNextLine()) {
+		    String line = scanner.nextLine();
+		 
+//		    System.out.println(line);
+		    StringTokenizer st = new StringTokenizer(line, "\t");
+		    if(st.countTokens() == 3){
+		    	String lemme = st.nextToken();
+		    	Integer index = Integer.parseInt(st.nextToken());
+		    	Integer poids = Integer.parseInt(st.nextToken());
+		    	this.poids.put(lemme, new Pair<Integer, Integer>(index, poids));
 		    }
 		}
 		

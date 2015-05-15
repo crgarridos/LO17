@@ -13220,7 +13220,7 @@ votre	votre
 voulais	voulais
 voulez	voulez
 vouliez	vouliez
-voulions	voulions
+voulions	vouloir
 vouloir	vouloir
 voulu	voulu
 vous	vous
