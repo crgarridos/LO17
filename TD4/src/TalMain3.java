@@ -14,10 +14,11 @@ public class TalMain3 {
 	
 	private static final String path_lexique = "filtreCorpus_30_03_2015.txt";
 	private static final String path_stoplist = "stoplist.txt";
+	private static final String path_poids = "poidsLemmes.txt";
 
 	public static void main(String args[]) {
 				
-		Lexique lex = new Lexique(path_lexique);
+		Lexique lex = new Lexique(path_lexique, path_poids);
 		Stoplist stoplist = new Stoplist(path_stoplist);
 		
 		Scanner scanner = new Scanner(System.in);
