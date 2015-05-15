@@ -133,36 +133,13 @@ public class Lexique {
 			   hash.put(valeur,prox);
 			}
 		}
-		//hash = sortMotsByProx(hash);
-		hash = sortByValue(hash);
 		
-//		List<String> mots = new ArrayList<>(hash.keySet()); 
-//		List<Integer> proxs = new ArrayList<>(hash.values()); 
-//		
-//		for (int i = 0; i < proxs.size(); i++) {
-//			for (int j = 0; j < proxs.size(); j++) {
-//				if(proxs.get(i) < proxs.get(j)){
-//					int p = proxs.get(i);
-//					proxs.set(i,proxs.get(j));
-//					proxs.set(j,p);
-//					String m = mots.get(i);
-//					mots.set(i,mots.get(j));
-//					mots.set(j,m);
-//				}
-//			}
-//		}
-//		
-//		
-//		HashMap<String, Integer> newHash = new HashMap<String, Integer>();
-//		for (int i = 0; i < mots.size(); i++)
-//			newHash.put(mots.get(i), proxs.get(i));
-//		
-		
-		HashMap<String,Integer> uniques = new HashMap<String,Integer>();
+		Map<String,Integer> uniques = new HashMap<String,Integer>();
 		for(Entry<String, Integer> entry : hash.entrySet()) {		
 		    if(!uniques.containsKey(entry.getKey()))
 				uniques.put(entry.getKey(),entry.getValue());
 		}
+		uniques = SortMapByValue.sortByComparator(uniques, SortMapByValue.DESC);
 		return uniques;
 	}	
 	
