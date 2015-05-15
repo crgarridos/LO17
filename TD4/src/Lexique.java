@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 public class Lexique {
 	
 	protected Map<String, String> lexique;
-	protected Map<String, Pair<Integer, Integer>> poids;
+	protected Map<Pair<String, Integer>, Integer> poids;
 
 	
 	public Lexique(String filePath, String poidsPath){
@@ -46,7 +46,7 @@ public class Lexique {
 		
 		scanner.close();
 		
-		this.poids = new HashMap<String, Pair<Integer, Integer>>();
+		this.poids = new HashMap<Pair<String, Integer>, Integer>();
 		
 		//Poids des lemmes
 		try {
@@ -66,7 +66,7 @@ public class Lexique {
 		    	String lemme = st.nextToken();
 		    	Integer index = Integer.parseInt(st.nextToken());
 		    	Integer poids = Integer.parseInt(st.nextToken());
-		    	this.poids.put(lemme, new Pair<Integer, Integer>(index, poids));
+		    	this.poids.put(new Pair<String, Integer>(lemme, index), poids);
 		    }
 		}
 		
@@ -123,9 +123,12 @@ public class Lexique {
 		
 		int seuil = mot.length()*75/100;
 		for(String cle : lexique.keySet()){
+			String lemme = lexique.get(cle);
+			
 			if(cle.length() < lengthMin)
 				continue;
-			int poids = getPoids(cle,index);
+			
+			int poids = getPoids(lemme, index);
 			int prox = levenshteinDistance(mot, cle) - poids;
 			if(prox <= seuil){// && prox >= seuil/2){
 			   String valeur = lexique.get(cle);
@@ -138,7 +141,7 @@ public class Lexique {
 		    if(!uniques.containsKey(entry.getKey()))
 				uniques.put(entry.getKey(),entry.getValue());
 		}
-		uniques = SortMapByValue.sortByComparator(uniques, SortMapByValue.DESC);
+		uniques = SortMapByValue.sortByComparator(uniques, SortMapByValue.ASC);
 		return uniques;
 	}
 	
@@ -163,8 +166,10 @@ public class Lexique {
 	
 	private int getPoids(String cle, int index) {
 		
-		if(poids.containsKey(cle) && poids.get(cle).getFirst().equals(new Integer(index))){
-			return poids.get(cle).getSecond();
+		Pair<String, Integer> pair = new Pair<>(cle, index);
+		if(poids.containsKey(pair)){
+			System.out.println("poids:"+poids.get(pair));
+			return poids.get(pair);
 		}
 		return 0;
 	}
