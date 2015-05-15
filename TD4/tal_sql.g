@@ -76,16 +76,16 @@ requete returns [Arbre req_arbre = new Arbre("")]
 				req_arbre.ajouteFils(new Arbre("","page"));
 			})
 			
-		(| dt = date 
+		( dt = date 
 			{
 				dt_arbre = $dt.date_arbre;
 				req_arbre.ajouteFils(dt_arbre);
-			})
-		MOT
+			}
+		|MOT
 			{
 				req_arbre.ajouteFils(new Arbre("","from titreresume"));
 				req_arbre.ajouteFils(new Arbre("","where"));
-			}
+			})+
 			
 		ps = params 
 			{
@@ -95,18 +95,18 @@ requete returns [Arbre req_arbre = new Arbre("")]
 ;
 
 date returns [Arbre date_arbre = new Arbre("")] :
-		(|JOUR 
+		(JOUR 
 			{
 				date_arbre.ajouteFils(new Arbre("","jour"));
-			} )
-		(| MOIS
+			} 
+		| MOIS
 			{
 				date_arbre.ajouteFils(new Arbre("","mois"));
-			})
-		(| ANNEE
+			}
+		| ANNEE
 			{
 				date_arbre.ajouteFils(new Arbre("","annee"));
-			})
+			})+
 ;
 
 params returns [Arbre les_pars_arbre = new Arbre("")]

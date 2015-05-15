@@ -1,1 +1,4 @@
+vouloir	0	2
 vouloir	1	2
+article	1	2
+page	1	2
