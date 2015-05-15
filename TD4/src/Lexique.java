@@ -136,30 +136,107 @@ public class Lexique {
 		return uniques;
 	}
 	
-	public  List<String> prefixe(String mot, int seuil, int index){
-		List<String> list = new ArrayList<>();
+	public  Map<String, Integer> prefixe(String mot, int seuil, int index){
+		Map<String, Integer> map = new HashMap<>();
 		
 		Iterator<String> it = lexique.keySet().iterator();
 		while (it.hasNext()){
 		   String cle = it.next();
+		   String lemme = lexique.get(cle);
+		   
 		   int prox = prox(mot, cle);
 		   
 		   //if(prox > 0) System.out.println("prox="+prox+" m1="+mot+" m2="+cle);
 		   
 		   if(prox >= seuil){
-			   String valeur = lexique.get(cle);
-			   list.add(valeur);
+			   map.put(lemme, prox);
 		   }
 		}
 		
-		return list;
+		return map;
+	}
+
+	public String comparePrefixeLevensthein(Map<String, Integer> candidatsPrefixe, Map<String, Integer> candidatsLeven){
+		
+		Map<String, Pair<Integer, Integer>> match = new HashMap<String, Pair<Integer, Integer>>();
+		String closest = null;
+		// 0 -> 100
+		// 1 -> 90
+		// 2 -> 80
+		// 3 -> 70
+		// 4 -> 60
+		
+		for(Entry<String, Integer> entry : candidatsLeven.entrySet()) {	
+			String lemme = entry.getKey();
+			
+			if(candidatsPrefixe.containsKey(lemme)){
+				match.put(entry.getKey(), new Pair<>(candidatsPrefixe.get(lemme), entry.getValue()));
+			}
+		}
+		
+		if(!match.isEmpty()){
+			//Déterminer quel couple (score prefixe; score leven) est le meilleur
+			int highest_score = 0;
+			String highest_lemme = null;
+			
+			for(Entry<String, Pair<Integer, Integer>> entry : match.entrySet()) {	
+				String lemme = entry.getKey();
+				int score = entry.getValue().getFirst() + levenToPrefix(entry.getValue().getSecond());
+				if(score > highest_score){
+					highest_score = score;
+					highest_lemme = lemme;
+				}
+			}
+			
+			closest = highest_lemme;
+			
+		}
+		else{
+			//Récupérer meilleur score préfixe
+			int highest_score_prefixe = 0;
+			String highest_lemme_prefixe = null;
+			
+			for(Entry<String, Integer> entry : candidatsPrefixe.entrySet()) {	
+				String lemme = entry.getKey();
+				int score = entry.getValue();
+				if(score > highest_score_prefixe){
+					highest_score_prefixe = score;
+					highest_lemme_prefixe = lemme;
+				}
+			}
+			//Récupérer meilleur score leven
+			int highest_score_leven = 0;
+			String highest_lemme_leven = null;
+			
+			for(Entry<String, Integer> entry : candidatsLeven.entrySet()) {	
+				String lemme = entry.getKey();
+				int score = entry.getValue();
+				if(score > highest_score_leven){
+					highest_score_leven = score;
+					highest_lemme_leven = lemme;
+				}
+			}
+			highest_score_leven = levenToPrefix(highest_score_leven);
+			
+			//Déterminer lequel est le meilleur
+			if(highest_score_leven >= highest_score_prefixe)
+				closest = highest_lemme_leven;
+			else
+				closest = highest_lemme_prefixe;
+		}
+		
+		
+		return closest;
+	}
+	
+	private int levenToPrefix(int leven){
+		return 100-leven*10;
 	}
 	
 	private int getPoids(String cle, int index) {
 		
 		Pair<String, Integer> pair = new Pair<>(cle, index);
 		if(poids.containsKey(pair)){
-			System.out.println("poids:"+poids.get(pair));
 			return poids.get(pair);
 		}
 		return 0;
