@@ -10921,6 +10921,7 @@ royant	roya
 royaume	roya
 rt	rt
 rubis	rubis
+rubriques rubique
 ruche	ruche
 rude	rude
 rues	rues
@@ -13212,6 +13213,7 @@ vont	vont
 voroize	voroize
 vos	vos
 votre	votre
+voudrais	vouloir
 voulais	voulais
 voulez	voulez
 vouliez	vouliez

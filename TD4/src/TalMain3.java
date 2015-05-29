@@ -23,7 +23,7 @@ public class TalMain3 {
 
 	
 	// je veux tous les articles qui parlent de aero
-	
+	// Je voudrais les articles dont le titre contient le mot chimie. 
 	public static void main(String args[]) {
 				
 		Lexique lex = new Lexique(path_lexique, path_poids);
@@ -31,7 +31,7 @@ public class TalMain3 {
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Texte : ");
-		String s = scanner.nextLine();
+		String s = scanner.nextLine();	
 		System.out.println(s);
 		while (!s.equals("*")) {
 			

@@ -5,6 +5,10 @@ SELECT : 'vouloir'
 
 ARTICLE : 'article'
 ;
+TITRE :  'titre'
+;
+RUBRIQUE : 'rubrique'
+;
 
 PAGE : 'page'
 ;
@@ -63,7 +67,7 @@ listerequetes returns [String sql = ""]
 
 requete returns [Arbre req_arbre = new Arbre("")]
 	@init {Arbre ps_arbre, dt_arbre;} : 
-		(|SELECT 
+		(| SELECT 
 			{
 				req_arbre.ajouteFils(new Arbre("","select distinct"));
 			} )
@@ -75,20 +79,17 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			{
 				req_arbre.ajouteFils(new Arbre("","numero"));
 			})
-			
-		( dt = date 
-			{
-				dt_arbre = $dt.date_arbre;
-				req_arbre.ajouteFils(dt_arbre);
+		(TITRE & (MOT)+ {
+				req_arbre.ajouteFils(new Arbre("","from titre"));
 			}
-		|MOT
+		|(MOT)+
 			{
-				req_arbre.ajouteFils(new Arbre("","from texte"));
-				req_arbre.ajouteFils(new Arbre("","where"));
-			})+
+				req_arbre.ajouteFils(new Arbre("","from titretexte"));
+			})
 			
 		ps = params 
 			{
+				req_arbre.ajouteFils(new Arbre("","where"));
 				ps_arbre = $ps.les_pars_arbre;
 				req_arbre.ajouteFils(ps_arbre);
 			}
