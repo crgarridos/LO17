@@ -6,9 +6,14 @@ import java.util.StringTokenizer;
 
 
 
+
+
 //import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonTokenStream;
+
+import tal.tal_sqlLexer;
+import tal.tal_sqlParser;
 
 public class TalMain3 {
 	
@@ -16,6 +21,9 @@ public class TalMain3 {
 	private static final String path_stoplist = "stoplist.txt";
 	private static final String path_poids = "poidsLemmes.txt";
 
+	
+	// je veux tous les articles qui parlent de aero
+	
 	public static void main(String args[]) {
 				
 		Lexique lex = new Lexique(path_lexique, path_poids);
@@ -84,6 +92,10 @@ public class TalMain3 {
 				tal_sqlParser parser = new tal_sqlParser(tokens);
 				String arbre = parser.listerequetes();
 				System.out.println(arbre);
+				RequeteSQL rq = new RequeteSQL(arbre);
+				System.out.println("ResultSet:");
+				System.out.println(rq.getOutputString());
+				rq.close();
 			} catch (Exception e) {
 			}
 			System.out.print("Texte : ");

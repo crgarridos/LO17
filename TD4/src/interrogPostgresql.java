@@ -36,26 +36,29 @@ public class interrogPostgresql {
 			}
 
 			try {
-				Connection con;
-				Statement stmt;
-
-				// Establish Connection to the database at URL with usename and
-				// password
-				con = DriverManager.getConnection(url, username, password);
-				stmt = con.createStatement();
-				// Send the query and bind to the result set
-				ResultSet rs = stmt.executeQuery(requete);
-				while (rs.next()) {
-					String s = rs.getString("fichier");
-					System.out.print(s);
-					System.out.print("\t");
-					s = rs.getString("rubrique");
-					System.out.print(s);
-					System.out.println();
-				}
-				// Close resources
-				stmt.close();
-				con.close();
+//				Connection con;
+//				Statement stmt;
+//
+//				// Establish Connection to the database at URL with usename and
+//				// password
+//				con = DriverManager.getConnection(url, username, password);
+//				stmt = con.createStatement();
+//				// Send the query and bind to the result set
+//				ResultSet rs = stmt.executeQuery(requete);
+//				while (rs.next()) {
+//					String s = rs.getString("fichier");
+//					System.out.print(s);
+//					System.out.print("\t");
+//					s = rs.getString("rubrique");
+//					System.out.print(s);
+//					System.out.println();
+//				}
+//				// Close resources
+//				stmt.close();
+//				con.close();
+				RequeteSQL rq = new RequeteSQL(requete);
+				System.out.println(rq.getOutputString());
+				rq.close();
 
 			}
 			// print out decent erreur messages

@@ -9,6 +9,9 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import util.Pair;
+import util.SortMapByValue;
+
 
 public class Lexique {
 	

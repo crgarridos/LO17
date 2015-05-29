@@ -1,3 +1,4 @@
+package tal;
 class Arbre {
 	Arbre fils = null;
 	Arbre frere = null;
