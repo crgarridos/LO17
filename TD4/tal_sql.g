@@ -69,11 +69,11 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			} )
 		(ARTICLE
 			{
-				req_arbre.ajouteFils(new Arbre("","article"));
+				req_arbre.ajouteFils(new Arbre("","fichier"));
 			}
 		 | PAGE
 			{
-				req_arbre.ajouteFils(new Arbre("","page"));
+				req_arbre.ajouteFils(new Arbre("","numero"));
 			})
 			
 		( dt = date 
@@ -83,7 +83,7 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			}
 		|MOT
 			{
-				req_arbre.ajouteFils(new Arbre("","from titreresume"));
+				req_arbre.ajouteFils(new Arbre("","from texte"));
 				req_arbre.ajouteFils(new Arbre("","where"));
 			})+
 			
@@ -143,6 +143,6 @@ conj returns [Arbre conj_arbre = new Arbre("")]
 
 param returns [Arbre lepar_arbre = new Arbre("")] :
 	a = VAR
-		{ lepar_arbre.ajouteFils(new Arbre("mot =", "'"+a.getText()+"'"));}
+		{ lepar_arbre.ajouteFils(new Arbre("mot LIKE", "'"+a.getText()+"\%'"));}
 ;
 
