@@ -3,6 +3,8 @@ grammar tal_sql;
 SELECT : 'vouloir'
 ;
 
+COUNT:	'combien' | 'nombre'	
+;
 ARTICLE : 'article'
 ;
 TITRE :  'titre'
@@ -71,6 +73,10 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			{
 				req_arbre.ajouteFils(new Arbre("","select distinct"));
 			} )
+		(| COUNT 
+		{
+			req_arbre.ajouteFils(new Arbre("","count"));
+		} )
 		(ARTICLE
 			{
 				req_arbre.ajouteFils(new Arbre("","fichier"));
