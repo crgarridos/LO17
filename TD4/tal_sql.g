@@ -113,7 +113,7 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			{
 				req_arbre.ajouteFils(new Arbre("","from date"));
 			}
-		|(ENTRE & date & date
+		|(ENTRE & date & AND & date
 			{
 				req_arbre.ajouteFils(new Arbre("","from date"));
 			}))
