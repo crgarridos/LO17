@@ -5,12 +5,10 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 //import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonTokenStream;
-
-import tal.tal_sqlLexer;
-import tal.tal_sqlParser;
 
 public class TalMain3 {
 	
@@ -29,6 +27,7 @@ public class TalMain3 {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Texte : ");
 		String s = scanner.nextLine();	
+		s = s.replaceAll("'"," ");
 		System.out.println(s);
 		while (!s.equals("*")) {
 			

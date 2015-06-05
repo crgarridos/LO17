@@ -36,6 +36,12 @@ MOIS: 'janvier' | 'février' | 'mars' | 'avril' | 'mai' | 'juin' | 'juillet' | '
 ANNEE	:	('0'..'9')('0'..'9')('0'..'9')('0'..'9')
 ;
 
+DATE	:	JOUR ('/') ('0'..'9')('0'..'9') ('/') ANNEE
+;
+
+ENTRE	:	'entre'
+;
+
 WS  : (' ' |'\t' | '\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' |  'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' ) {skip();} | '\n' 
 ;
 
@@ -68,10 +74,13 @@ listerequetes returns [String sql = ""]
 ;
 
 requete returns [Arbre req_arbre = new Arbre("")]
-	@init {Arbre ps_arbre, dt_arbre;} : 
+	@init {
+		Arbre ps_arbre, dt_arbre;
+		req_arbre.ajouteFils(new Arbre("","select distinct"));
+	} : 
 		(| SELECT 
 			{
-				req_arbre.ajouteFils(new Arbre("","select distinct"));
+				
 			} )
 		(| COUNT 
 		{
@@ -99,10 +108,23 @@ requete returns [Arbre req_arbre = new Arbre("")]
 				ps_arbre = $ps.les_pars_arbre;
 				req_arbre.ajouteFils(ps_arbre);
 			}
+			
+		(|date
+			{
+				req_arbre.ajouteFils(new Arbre("","from date"));
+			}
+		|(ENTRE & date & date
+			{
+				req_arbre.ajouteFils(new Arbre("","from date"));
+			}))
 ;
 
 date returns [Arbre date_arbre = new Arbre("")] :
-		(JOUR 
+		(DATE 
+			{
+				date_arbre.ajouteFils(new Arbre("","date"));
+			})
+		|(JOUR 
 			{
 				date_arbre.ajouteFils(new Arbre("","jour"));
 			} 
@@ -113,7 +135,7 @@ date returns [Arbre date_arbre = new Arbre("")] :
 		| ANNEE
 			{
 				date_arbre.ajouteFils(new Arbre("","annee"));
-			})
+			})+
 ;
 
 params returns [Arbre les_pars_arbre = new Arbre("")]
