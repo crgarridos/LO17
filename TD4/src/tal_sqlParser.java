@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-05 15:44:21
+// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-05 16:14:31
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -121,20 +121,21 @@ public class tal_sqlParser extends Parser {
 
 
 	// $ANTLR start "requete"
-	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:76:1: requete returns [Arbre req_arbre = new Arbre(\"\")] : (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (| date | ( ENTRE date AND date ) ) ;
+	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:76:1: requete returns [Arbre req_arbre = new Arbre(\"\")] : (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (|pdate= date | ( ENTRE date AND date ) ) ;
 	public final Arbre requete() throws RecognitionException {
 		Arbre req_arbre =  new Arbre("");
 
 
 		Arbre ps =null;
+		Arbre pdate =null;
 
 
-				Arbre ps_arbre, dt_arbre;
+				Arbre ps_arbre, dt_arbre, pdate_arbre;
 				req_arbre.ajouteFils(new Arbre("","select distinct"));
 			
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:80:4: ( (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (| date | ( ENTRE date AND date ) ) )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:81:3: (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (| date | ( ENTRE date AND date ) )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:80:4: ( (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (|pdate= date | ( ENTRE date AND date ) ) )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:81:3: (| SELECT ) (| COUNT ) ( ARTICLE | PAGE ) ( TITRE ( MOT )+ | ( MOT )+ ) ps= params (|pdate= date | ( ENTRE date AND date ) )
 			{
 			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:81:3: (| SELECT )
 			int alt2=2;
@@ -340,7 +341,7 @@ public class tal_sqlParser extends Parser {
 							ps_arbre = ps;
 							req_arbre.ajouteFils(ps_arbre);
 						
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:112:3: (| date | ( ENTRE date AND date ) )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:112:3: (|pdate= date | ( ENTRE date AND date ) )
 			int alt8=3;
 			switch ( input.LA(1) ) {
 			case EOF:
@@ -374,30 +375,32 @@ public class tal_sqlParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:112:5: date
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:112:5: pdate= date
 					{
-					pushFollow(FOLLOW_date_in_requete626);
-					date();
+					pushFollow(FOLLOW_date_in_requete630);
+					pdate=date();
 					state._fsp--;
 
 
 									req_arbre.ajouteFils(new Arbre("","from date"));
+									pdate_arbre = pdate;
+									req_arbre.ajouteFils(pdate_arbre);
 								
 					}
 					break;
 				case 3 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:116:4: ( ENTRE date AND date )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:118:4: ( ENTRE date AND date )
 					{
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:116:4: ( ENTRE date AND date )
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:116:5: ENTRE date AND date
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:118:4: ( ENTRE date AND date )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:118:5: ENTRE date AND date
 					{
-					match(input,ENTRE,FOLLOW_ENTRE_in_requete637); 
-					pushFollow(FOLLOW_date_in_requete640);
+					match(input,ENTRE,FOLLOW_ENTRE_in_requete641); 
+					pushFollow(FOLLOW_date_in_requete644);
 					date();
 					state._fsp--;
 
-					match(input,AND,FOLLOW_AND_in_requete643); 
-					pushFollow(FOLLOW_date_in_requete646);
+					match(input,AND,FOLLOW_AND_in_requete647); 
+					pushFollow(FOLLOW_date_in_requete650);
 					date();
 					state._fsp--;
 
@@ -428,13 +431,18 @@ public class tal_sqlParser extends Parser {
 
 
 	// $ANTLR start "date"
-	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:122:1: date returns [Arbre date_arbre = new Arbre(\"\")] : ( ( DATE ) | ( JOUR | MOIS | ANNEE )+ );
+	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:124:1: date returns [Arbre date_arbre = new Arbre(\"\")] : ( (a= DATE ) | (b= JOUR |c= MOIS |d= ANNEE )+ );
 	public final Arbre date() throws RecognitionException {
 		Arbre date_arbre =  new Arbre("");
 
 
+		Token a=null;
+		Token b=null;
+		Token c=null;
+		Token d=null;
+
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:122:49: ( ( DATE ) | ( JOUR | MOIS | ANNEE )+ )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:124:49: ( (a= DATE ) | (b= JOUR |c= MOIS |d= ANNEE )+ )
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==DATE) ) {
@@ -452,23 +460,23 @@ public class tal_sqlParser extends Parser {
 
 			switch (alt10) {
 				case 1 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:123:3: ( DATE )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:125:3: (a= DATE )
 					{
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:123:3: ( DATE )
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:123:4: DATE
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:125:3: (a= DATE )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:125:4: a= DATE
 					{
-					match(input,DATE,FOLLOW_DATE_in_date669); 
+					a=(Token)match(input,DATE,FOLLOW_DATE_in_date677); 
 
-									date_arbre.ajouteFils(new Arbre("","date"));
+									date_arbre.ajouteFils(new Arbre("date", a.getText()));
 								
 					}
 
 					}
 					break;
 				case 2 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:127:4: ( JOUR | MOIS | ANNEE )+
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:129:4: (b= JOUR |c= MOIS |d= ANNEE )+
 					{
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:127:4: ( JOUR | MOIS | ANNEE )+
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:129:4: (b= JOUR |c= MOIS |d= ANNEE )+
 					int cnt9=0;
 					loop9:
 					while (true) {
@@ -492,29 +500,29 @@ public class tal_sqlParser extends Parser {
 						}
 						switch (alt9) {
 						case 1 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:127:5: JOUR
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:129:5: b= JOUR
 							{
-							match(input,JOUR,FOLLOW_JOUR_in_date682); 
+							b=(Token)match(input,JOUR,FOLLOW_JOUR_in_date694); 
 
-											date_arbre.ajouteFils(new Arbre("","jour"));
+											date_arbre.ajouteFils(new Arbre("jour = ",  b.getText()));
 										
 							}
 							break;
 						case 2 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:131:5: MOIS
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:133:5: c= MOIS
 							{
-							match(input,MOIS,FOLLOW_MOIS_in_date695); 
+							c=(Token)match(input,MOIS,FOLLOW_MOIS_in_date711); 
 
-											date_arbre.ajouteFils(new Arbre("","mois"));
+											date_arbre.ajouteFils(new Arbre("mois = ", c.getText()));
 										
 							}
 							break;
 						case 3 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:135:5: ANNEE
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:137:5: d= ANNEE
 							{
-							match(input,ANNEE,FOLLOW_ANNEE_in_date706); 
+							d=(Token)match(input,ANNEE,FOLLOW_ANNEE_in_date725); 
 
-											date_arbre.ajouteFils(new Arbre("","annee"));
+											date_arbre.ajouteFils(new Arbre("annee = ", d.getText()));
 										
 							}
 							break;
@@ -546,7 +554,7 @@ public class tal_sqlParser extends Parser {
 
 
 	// $ANTLR start "params"
-	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:141:1: params returns [Arbre les_pars_arbre = new Arbre(\"\")] : par1= param (par2= conj par3= param )* ;
+	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:143:1: params returns [Arbre les_pars_arbre = new Arbre(\"\")] : par1= param (par2= conj par3= param )* ;
 	public final Arbre params() throws RecognitionException {
 		Arbre les_pars_arbre =  new Arbre("");
 
@@ -557,10 +565,10 @@ public class tal_sqlParser extends Parser {
 
 		Arbre par1_arbre, par2_arbre, par3_arbre;
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:142:52: (par1= param (par2= conj par3= param )* )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:143:3: par1= param (par2= conj par3= param )*
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:144:52: (par1= param (par2= conj par3= param )* )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:145:3: par1= param (par2= conj par3= param )*
 			{
-			pushFollow(FOLLOW_param_in_params739);
+			pushFollow(FOLLOW_param_in_params758);
 			par1=param();
 			state._fsp--;
 
@@ -568,7 +576,7 @@ public class tal_sqlParser extends Parser {
 							par1_arbre = par1;
 							les_pars_arbre.ajouteFils(par1_arbre);
 						
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:148:3: (par2= conj par3= param )*
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:150:3: (par2= conj par3= param )*
 			loop11:
 			while (true) {
 				int alt11=2;
@@ -579,9 +587,9 @@ public class tal_sqlParser extends Parser {
 
 				switch (alt11) {
 				case 1 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:148:4: par2= conj par3= param
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:150:4: par2= conj par3= param
 					{
-					pushFollow(FOLLOW_conj_in_params754);
+					pushFollow(FOLLOW_conj_in_params773);
 					par2=conj();
 					state._fsp--;
 
@@ -589,7 +597,7 @@ public class tal_sqlParser extends Parser {
 									par2_arbre = par2;
 									les_pars_arbre.ajouteFils(par2_arbre);
 								
-					pushFollow(FOLLOW_param_in_params769);
+					pushFollow(FOLLOW_param_in_params788);
 					par3=param();
 					state._fsp--;
 
@@ -622,16 +630,16 @@ public class tal_sqlParser extends Parser {
 
 
 	// $ANTLR start "conj"
-	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:161:1: conj returns [Arbre conj_arbre = new Arbre(\"\")] : ( AND | OR ) ;
+	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:163:1: conj returns [Arbre conj_arbre = new Arbre(\"\")] : ( AND | OR ) ;
 	public final Arbre conj() throws RecognitionException {
 		Arbre conj_arbre =  new Arbre("");
 
 
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:162:2: ( ( AND | OR ) )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:163:3: ( AND | OR )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:164:2: ( ( AND | OR ) )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:165:3: ( AND | OR )
 			{
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:163:3: ( AND | OR )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:165:3: ( AND | OR )
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0==AND) ) {
@@ -649,18 +657,18 @@ public class tal_sqlParser extends Parser {
 
 			switch (alt12) {
 				case 1 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:163:4: AND
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:165:4: AND
 					{
-					match(input,AND,FOLLOW_AND_in_conj797); 
+					match(input,AND,FOLLOW_AND_in_conj816); 
 
 									conj_arbre.ajouteFils(new Arbre("", "AND"));
 								
 					}
 					break;
 				case 2 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:167:4: OR
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:169:4: OR
 					{
-					match(input,OR,FOLLOW_OR_in_conj807); 
+					match(input,OR,FOLLOW_OR_in_conj826); 
 
 									conj_arbre.ajouteFils(new Arbre("", "OR"));
 								
@@ -686,7 +694,7 @@ public class tal_sqlParser extends Parser {
 
 
 	// $ANTLR start "param"
-	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:173:1: param returns [Arbre lepar_arbre = new Arbre(\"\")] : a= VAR ;
+	// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:175:1: param returns [Arbre lepar_arbre = new Arbre(\"\")] : a= VAR ;
 	public final Arbre param() throws RecognitionException {
 		Arbre lepar_arbre =  new Arbre("");
 
@@ -694,10 +702,10 @@ public class tal_sqlParser extends Parser {
 		Token a=null;
 
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:173:51: (a= VAR )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:174:2: a= VAR
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:175:51: (a= VAR )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:176:2: a= VAR
 			{
-			a=(Token)match(input,VAR,FOLLOW_VAR_in_param831); 
+			a=(Token)match(input,VAR,FOLLOW_VAR_in_param850); 
 			 lepar_arbre.ajouteFils(new Arbre("mot LIKE", "'"+a.getText()+"%'"));
 			}
 
@@ -727,19 +735,19 @@ public class tal_sqlParser extends Parser {
 	public static final BitSet FOLLOW_MOT_in_requete580 = new BitSet(new long[]{0x0000000000102000L});
 	public static final BitSet FOLLOW_MOT_in_requete590 = new BitSet(new long[]{0x0000000000102000L});
 	public static final BitSet FOLLOW_params_in_requete610 = new BitSet(new long[]{0x0000000000001E22L});
-	public static final BitSet FOLLOW_date_in_requete626 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ENTRE_in_requete637 = new BitSet(new long[]{0x0000000000001A20L});
-	public static final BitSet FOLLOW_date_in_requete640 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_AND_in_requete643 = new BitSet(new long[]{0x0000000000001A20L});
-	public static final BitSet FOLLOW_date_in_requete646 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_DATE_in_date669 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_JOUR_in_date682 = new BitSet(new long[]{0x0000000000001822L});
-	public static final BitSet FOLLOW_MOIS_in_date695 = new BitSet(new long[]{0x0000000000001822L});
-	public static final BitSet FOLLOW_ANNEE_in_date706 = new BitSet(new long[]{0x0000000000001822L});
-	public static final BitSet FOLLOW_param_in_params739 = new BitSet(new long[]{0x0000000000004012L});
-	public static final BitSet FOLLOW_conj_in_params754 = new BitSet(new long[]{0x0000000000100000L});
-	public static final BitSet FOLLOW_param_in_params769 = new BitSet(new long[]{0x0000000000004012L});
-	public static final BitSet FOLLOW_AND_in_conj797 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OR_in_conj807 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VAR_in_param831 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_date_in_requete630 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ENTRE_in_requete641 = new BitSet(new long[]{0x0000000000001A20L});
+	public static final BitSet FOLLOW_date_in_requete644 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_AND_in_requete647 = new BitSet(new long[]{0x0000000000001A20L});
+	public static final BitSet FOLLOW_date_in_requete650 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_DATE_in_date677 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_JOUR_in_date694 = new BitSet(new long[]{0x0000000000001822L});
+	public static final BitSet FOLLOW_MOIS_in_date711 = new BitSet(new long[]{0x0000000000001822L});
+	public static final BitSet FOLLOW_ANNEE_in_date725 = new BitSet(new long[]{0x0000000000001822L});
+	public static final BitSet FOLLOW_param_in_params758 = new BitSet(new long[]{0x0000000000004012L});
+	public static final BitSet FOLLOW_conj_in_params773 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_param_in_params788 = new BitSet(new long[]{0x0000000000004012L});
+	public static final BitSet FOLLOW_AND_in_conj816 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OR_in_conj826 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VAR_in_param850 = new BitSet(new long[]{0x0000000000000002L});
 }

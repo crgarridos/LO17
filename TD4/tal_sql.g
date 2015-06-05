@@ -75,7 +75,7 @@ listerequetes returns [String sql = ""]
 
 requete returns [Arbre req_arbre = new Arbre("")]
 	@init {
-		Arbre ps_arbre, dt_arbre;
+		Arbre ps_arbre, dt_arbre, pdate_arbre;
 		req_arbre.ajouteFils(new Arbre("","select distinct"));
 	} : 
 		(| SELECT 
@@ -109,9 +109,11 @@ requete returns [Arbre req_arbre = new Arbre("")]
 				req_arbre.ajouteFils(ps_arbre);
 			}
 			
-		(|date
+		(|pdate = date
 			{
 				req_arbre.ajouteFils(new Arbre("","from date"));
+				pdate_arbre = $pdate.date_arbre;
+				req_arbre.ajouteFils(pdate_arbre);
 			}
 		|(ENTRE & date & AND & date
 			{
@@ -120,21 +122,21 @@ requete returns [Arbre req_arbre = new Arbre("")]
 ;
 
 date returns [Arbre date_arbre = new Arbre("")] :
-		(DATE 
+		(a = DATE 
 			{
-				date_arbre.ajouteFils(new Arbre("","date"));
+				date_arbre.ajouteFils(new Arbre("date", a.getText()));
 			})
-		|(JOUR 
+		|(b = JOUR 
 			{
-				date_arbre.ajouteFils(new Arbre("","jour"));
+				date_arbre.ajouteFils(new Arbre("jour = ",  b.getText()));
 			} 
-		| MOIS
+		| c = MOIS
 			{
-				date_arbre.ajouteFils(new Arbre("","mois"));
+				date_arbre.ajouteFils(new Arbre("mois = ", c.getText()));
 			}
-		| ANNEE
+		| d =ANNEE
 			{
-				date_arbre.ajouteFils(new Arbre("","annee"));
+				date_arbre.ajouteFils(new Arbre("annee = ", d.getText()));
 			})+
 ;
 

@@ -71,7 +71,6 @@ aventure
 avions
 avoir
 avons
-avril
 ayant
 aéronautique
 baptisé
@@ -241,7 +240,6 @@ durée
 dynamique
 dès
 début
-décembre
 décidé
 décision
 déclare
@@ -334,7 +332,6 @@ française
 françaises
 fruit
 futur
-février
 gestion
 globale
 goût
@@ -403,7 +400,6 @@ intérieur
 intérêt
 j
 jamais
-janvier
 japon
 je
 jean
@@ -411,7 +407,6 @@ jeune
 jeunes
 jour
 journée
-juin
 jusqu
 l
 la
@@ -446,7 +441,6 @@ maladies
 manière
 marché
 marchés
-mars
 matière
 matériaux
 maîtrise
@@ -515,7 +509,6 @@ nouveaux
 nouvel
 nouvelle
 nouvelles
-novembre
 numérique
 nutrition
 néanmoins
@@ -531,7 +524,6 @@ observer
 obtenir
 obtenus
 occasion
-octobre
 oeuvre
 of
 offre
@@ -753,7 +745,6 @@ secteurs
 sein
 selon
 semble
-septembre
 sera
 seront
 service

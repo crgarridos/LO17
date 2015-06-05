@@ -44,38 +44,19 @@ public class TalMain3 {
 				mot = mot.toLowerCase();
 				int index = i++;
 				System.out.println(index);
-				String lemme = lex.retrouve(mot);
-				if(lemme != null){
-					System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
-					sanitizedSentence+=lemme+" ";
+				if(isInteger(mot.substring(0, 1))){
+					sanitizedSentence += mot+" ";
 				}else{
-					//System.out.println("Mot non trouvé, calcul prefixe ...");
-					Map<String, Integer> candidatsPrefixe = lex.prefixe(mot, 60, index);
-					Map<String, Integer> candidatsLeven = lex.levenshtein(mot,index);
-					
-					sanitizedSentence+= lex.comparePrefixeLevensthein(candidatsPrefixe, candidatsLeven)+" ";
-					
-					/*if(!candidats.isEmpty()){
-						for(String lemme_candidat : candidats){
-							//System.out.println("Lemme prefix candidat: "+lemme_candidat);
-						}
-						sanitizedSentence+=candidats.get(0)+" ";
-					}
-					else{
-						//System.out.println("Echec du prefixe, calcul lenvenshein ...");
+					String lemme = lex.retrouve(mot);
+					if(lemme != null){
+						System.out.println("Mot retrouvé: "+mot+", lemme="+lemme);
+						sanitizedSentence+=lemme+" ";
+					}else{
+						Map<String, Integer> candidatsPrefixe = lex.prefixe(mot, 60, index);
+						Map<String, Integer> candidatsLeven = lex.levenshtein(mot,index);
 						
-	
-						if(!candidatsLeven.isEmpty()){
-							for(String candidat : candidatsLeven.keySet()){
-								System.out.println("Lemme Leven candidat: "+candidat + " - score: " + candidatsLeven.get(candidat));
-							}
-							sanitizedSentence+=candidatsLeven.keySet().toArray()[0]+" ";
-						}
-						else{
-							System.out.println("Echéc du levenshtein, Aucun mot trouvé");
-						}
-					}*/
-					//String[] candidats = lex.levenshtein(mot);
+						sanitizedSentence+= lex.comparePrefixeLevensthein(candidatsPrefixe, candidatsLeven)+" ";
+					}
 				}
 			}
 			
@@ -89,7 +70,7 @@ public class TalMain3 {
 				String arbre = parser.listerequetes();
 				System.out.println("Arbre SQL: "+arbre);
 				
-				RequeteSQL rq = new RequeteSQL(fixSQL(arbre));
+				RequeteSQL rq = new RequeteSQL(postCompute(arbre));
 				System.out.println("ResultSet:");
 				System.out.println(rq.getOutputString());
 				rq.close();
@@ -100,10 +81,42 @@ public class TalMain3 {
 		}
 		scanner.close();
 	}
-
+	
+	private static String postCompute(String input){
+		return fixDate(fixSQL(input));
+	}
 
 	private static String fixSQL(String arbre) {
+		System.out.println("fixSQL");
 		String result = arbre.replaceAll("count (.+) from","count(distinct $1) from");
 		return result;
+	}
+	
+	private static String fixDate(String arbre){
+		System.out.println("fixDate");
+		String pattern = "([0-9]{2})/([0-9]{2})/([0-9]{4})";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(arbre);
+
+		while (m.find()) {
+			String jour = m.group(1);
+			String mois = m.group(2);
+			String annee = m.group(3);
+			System.out.println("Found j: " + jour + " m: " + mois + " a: "+annee);
+		}
+		String result = arbre;
+		return result;
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 }

@@ -13733,3 +13733,15 @@ zérodur	zérodur
 îles	îles
 îlots	îlots
 Œil	Œil
+janvier	janvier
+février	février
+mars	mars
+avril	avril
+mai	mai
+juin	juin
+juillet	juillet
+août	août
+septembre	septembre
+octobre	octobre
+novembre	novembre
+décembre	décembre
