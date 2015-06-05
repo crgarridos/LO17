@@ -22,6 +22,7 @@ public class RequeteSQL {
 	
 	public RequeteSQL(String sql) throws SQLException {
 		requete = sql;
+		System.out.println("RequeteSQL: "+sql);
 		con = DriverManager.getConnection(url, username, password);
 		stmt = con.createStatement();
 		// Send the query and bind to the result set

@@ -1,12 +1,9 @@
-import java.io.*;
-import java.util.List;
+import java.io.StringReader;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
-
-
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
@@ -91,8 +88,9 @@ public class TalMain3 {
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				tal_sqlParser parser = new tal_sqlParser(tokens);
 				String arbre = parser.listerequetes();
-				System.out.println(arbre);
-				RequeteSQL rq = new RequeteSQL(arbre);
+				System.out.println("Arbre SQL: "+arbre);
+				
+				RequeteSQL rq = new RequeteSQL(fixSQL(arbre));
 				System.out.println("ResultSet:");
 				System.out.println(rq.getOutputString());
 				rq.close();
@@ -102,5 +100,11 @@ public class TalMain3 {
 			s = scanner.nextLine();
 		}
 		scanner.close();
+	}
+
+
+	private static String fixSQL(String arbre) {
+		String result = arbre.replaceAll("count (.+) from","count(distinct $1) from");
+		return result;
 	}
 }
