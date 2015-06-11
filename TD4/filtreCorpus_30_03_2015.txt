@@ -4448,6 +4448,7 @@ entraînera	entraîn
 entraîné	entraîn
 entraînée	entraîn
 entraînés	entraîn
+entre	entre
 entrecoupe	entrecoupe
 entrent	entrent
 entreprendre	entrepren

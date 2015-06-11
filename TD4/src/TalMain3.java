@@ -83,7 +83,7 @@ public class TalMain3 {
 	}
 	
 	private static String postCompute(String input){
-		return fixDate(fixSQL(input));
+		return fixAllDates(fixSQL(input));
 	}
 
 	private static String fixSQL(String arbre) {
@@ -105,6 +105,42 @@ public class TalMain3 {
 			System.out.println("Found j: " + jour + " m: " + mois + " a: "+annee);
 		}
 		String result = arbre;
+		return result;
+	}
+	
+	private static String fixAllDates(String arbre) {
+		System.out.println("fixAllDates");
+		String pattern = "^(.*?)and-between(.*?)$";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(arbre);
+		String result = "";
+		
+		while (m.find()) {
+			System.out.println(m.group(1));
+			System.out.println(m.group(2));
+			result = fixDateBetween(m.group(1), true) + " AND "+ fixDateBetween(m.group(2), false);
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	private static String fixDateBetween(String arbre, boolean isFirstOne){
+		System.out.println("fixDateBetween");
+		String result = arbre;
+		
+		if(isFirstOne){
+			result = result.replaceAll("jour = ","jour >=");
+			result = result.replaceAll("mois = ","mois >=");
+			result = result.replaceAll("annee = ","annee >=");
+		}else{
+			result = result.replaceAll("jour = ","jour <=");
+			result = result.replaceAll("mois = ","mois <=");
+			result = result.replaceAll("annee = ","annee <=");
+		}
+		
+		System.out.println(result);
 		return result;
 	}
 	

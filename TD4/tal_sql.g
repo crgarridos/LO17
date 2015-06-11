@@ -39,6 +39,9 @@ ANNEE	:	('0'..'9')('0'..'9')('0'..'9')('0'..'9')
 DATE	:	JOUR ('/') ('0'..'9')('0'..'9') ('/') ANNEE
 ;
 
+FULLDATE_DELIMITER:	('-')
+	;
+
 ENTRE	:	'entre'
 ;
 
@@ -75,7 +78,7 @@ listerequetes returns [String sql = ""]
 
 requete returns [Arbre req_arbre = new Arbre("")]
 	@init {
-		Arbre ps_arbre, dt_arbre, pdate_arbre;
+		Arbre ps_arbre, dt_arbre, pdate_arbre, pdate_arbre2, pdate_arbre3;
 		req_arbre.ajouteFils(new Arbre("","select distinct"));
 	} : 
 		(| SELECT 
@@ -115,16 +118,30 @@ requete returns [Arbre req_arbre = new Arbre("")]
 				pdate_arbre = $pdate.date_arbre;
 				req_arbre.ajouteFils(pdate_arbre);
 			}
-		|(ENTRE & date & AND & date
+		|(ENTRE & pdate11 = date & AND
 			{
 				req_arbre.ajouteFils(new Arbre("","from date"));
-			}))
+				pdate_arbre2 = $pdate11.date_arbre;
+				req_arbre.ajouteFils(pdate_arbre2);
+			}
+		pdate12 = date
+			{				
+				req_arbre.ajouteFils(new Arbre("","and-between"));
+				pdate_arbre3 = $pdate12.date_arbre;
+				req_arbre.ajouteFils(pdate_arbre3);
+			}
+			))
 ;
 
-date returns [Arbre date_arbre = new Arbre("")] :
-		(a = DATE 
+date returns [Arbre date_arbre = new Arbre("")] 
+@init {
+		Arbre fulldate_arbre;
+	} : 
+		(a = fulldate 
 			{
-				date_arbre.ajouteFils(new Arbre("date", a.getText()));
+				fulldate_arbre = $a.fulldate_arbre;
+				date_arbre.ajouteFils(fulldate_arbre);
+			}
 			})
 		|(b = JOUR 
 			{
@@ -138,6 +155,21 @@ date returns [Arbre date_arbre = new Arbre("")] :
 			{
 				date_arbre.ajouteFils(new Arbre("annee = ", d.getText()));
 			})+
+;
+
+fulldate returns [Arbre fulldate_arbre = new Arbre("")] :
+		b2 = JOUR & FULLDATE_DELIMITER
+			{
+				fulldate_arbre.ajouteFils(new Arbre("jour = ",  b2.getText()));
+			} 
+		c2 = JOUR & FULLDATE_DELIMITER
+			{
+				fulldate_arbre.ajouteFils(new Arbre("AND mois = ", c2.getText()));
+			}
+		d2 = ANNEE
+			{
+				fulldate_arbre.ajouteFils(new Arbre("AND annee = ", d.getText()));
+			}
 ;
 
 params returns [Arbre les_pars_arbre = new Arbre("")]
