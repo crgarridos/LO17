@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+
+
 //import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -19,8 +21,10 @@ public class TalMain3 {
 	
 	// je veux tous les articles qui parlent de aero
 	// Je voudrais les articles dont le titre contient le mot chimie. 
+	// je voudrais les articles du 2012
+	//je veux tous les articles qui contiennent aero entre 15-04-2015 et 15-06-2015
 	public static void main(String args[]) {
-				
+		System.out.println(findMainTable("select * from ya where hola"));
 		Lexique lex = new Lexique(path_lexique, path_poids);
 		Stoplist stoplist = new Stoplist(path_stoplist);
 		
@@ -69,11 +73,11 @@ public class TalMain3 {
 				tal_sqlParser parser = new tal_sqlParser(tokens);
 				String arbre = parser.listerequetes();
 				System.out.println("Arbre SQL: "+arbre);
-				
-				RequeteSQL rq = new RequeteSQL(postCompute(arbre));
-				System.out.println("ResultSet:");
-				System.out.println(rq.getOutputString());
-				rq.close();
+				System.out.println(postCompute(arbre));
+//				RequeteSQL rq = new RequeteSQL(postCompute(arbre));
+//				System.out.println("ResultSet:");
+//				System.out.println(rq.getOutputString());
+//				rq.close();
 			} catch (Exception e) {
 			}
 			System.out.print("Texte : ");
@@ -126,12 +130,26 @@ public class TalMain3 {
 			System.out.println("g2:"+m.group(2));
 			result = fixDateBetween(m.group(1), true) + " AND "+ fixDateBetween(m.group(2), false);
 		}
+		result = fixDateNameToNumber(result);
+		result = fixDateJoins(result, findMainTable(result));
+		System.out.println(result);
 		
 		System.out.println("fad: "+result);
-		
 		return result;
 	}
 	
+	private static String findMainTable(final String arbre) {
+		System.out.println("findMainTable");
+		String pattern = "from (.+?) ";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(arbre);
+		if (m.find()) {
+			System.out.println("found: "+m.group(1));
+			return m.group(1);
+		}
+		return null;
+	}
+
 	private static String fixDateBetween(String arbre, boolean isFirstOne){
 		System.out.println("fixDateBetween");
 		String result = arbre;
@@ -157,4 +175,42 @@ public class TalMain3 {
 	    // only got here if we didn't return false
 	    return true;
 	}
+	
+	final static String[] mois = {"janvier" , "février" , "mars" , "avril" , "mai" , "juin" , "juillet" , 
+			"août" , "septembre" , "octobre" , "novembre" , "décembre"};
+	
+	private static String fixDateNameToNumber(String arbre){
+		System.out.println("fixDateNameToNumber");
+		for (int i = 0; i < mois.length; i++){
+			arbre = arbre.replace(mois[i], ((i+1)<10?"0"+(i+1):i+1).toString());//TODO Ceci peut remplacer des ocurrences dans la chaine entier :s
+		}
+		return arbre;
+	}
+	
+	//(  select distinct  fichier  from titretexte  where    (    ( mot LIKE 'aero%'  ) ) 
+	//from date    ( jour =  15 jour =  04 annee =  2015  ) and-between    ( jour =  15 jour =  06 annee =  2015  ) )
+
+	private static String fixDateJoins(String arbre, String table){
+		System.out.println("fixDateJoins");
+		String pattern = "^.+(from "+table+".+from date).+$";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(arbre);
+		String result = "";
+		
+		if (m.find()) {
+			System.out.println(m.group(1));
+//			System.out.println(m.group(2));
+			int iFrom = arbre.indexOf("from");
+			arbre = arbre.replace("from "+table, "");
+			arbre = arbre.replace("from date", "");
+			String s1 = arbre.substring(0, iFrom);
+			String s2 = arbre.substring(iFrom);
+			String join = " INNER JOIN "+table+" t AND date d ON t.fichier = d.fichier ";
+			result = s1 + join + s2;
+		}		
+		return result;
+	}
+	
+	
+		
 }
