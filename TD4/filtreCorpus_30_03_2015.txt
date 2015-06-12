@@ -2862,7 +2862,7 @@ contaminent	contamin
 contaminé	contamin
 contaminée	contamin
 contaminées	contamin
-contenant	contenant
+contenant	contenir
 conteneur	conteneur
 contenir	contenir
 contente	contente
