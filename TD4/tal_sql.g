@@ -141,18 +141,34 @@ date returns [Arbre date_arbre = new Arbre("")]
 				date_arbre.ajouteFils(fulldate_sub_arbre);
 			}
 			)
-		|(b = JOUR 
+		| d =ANNEE
 			{
-				date_arbre.ajouteFils(new Arbre("jour = ",  "'"+b.getText()+"'"));
-			} 
+				date_arbre.ajouteFils(new Arbre("annee = ", "'"+d.getText()+"'"));
+			}
 		| c = MOIS
 			{
 				date_arbre.ajouteFils(new Arbre("mois = ", "'"+c.getText()+"'"));
 			}
-		| d =ANNEE
+		|( c = MOIS
 			{
-				date_arbre.ajouteFils(new Arbre("annee = ", "'"+d.getText()+"'"));
-			})+
+				date_arbre.ajouteFils(new Arbre("mois = ", "'"+c.getText()+"'"));
+			}
+		 d =ANNEE
+			{
+				date_arbre.ajouteFils(new Arbre("AND annee = ", "'"+d.getText()+"'"));
+			})
+		|(b = JOUR 
+			{
+				date_arbre.ajouteFils(new Arbre("jour = ",  "'"+b.getText()+"'"));
+			} 
+		c = MOIS
+			{
+				date_arbre.ajouteFils(new Arbre("AND mois = ", "'"+c.getText()+"'"));
+			}
+		d =ANNEE
+			{
+				date_arbre.ajouteFils(new Arbre("AND annee = ", "'"+d.getText()+"'"));
+			})
 ;
 
 fulldate returns [Arbre fulldate_arbre = new Arbre("")] :
