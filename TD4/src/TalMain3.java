@@ -83,7 +83,13 @@ public class TalMain3 {
 	}
 	
 	private static String postCompute(String input){
-		return fixAllDates(fixSQL(input));
+		return fixAllDates(fixSQL(fixParenthesis(input)));
+	}
+	
+	private static String fixParenthesis(String input){
+		String result = input.replaceAll("[()]", "").replaceAll("[ \t]+", " ");
+		System.out.println("fixParenthesis:" + result);
+		return result;
 	}
 
 	private static String fixSQL(String arbre) {
@@ -116,12 +122,12 @@ public class TalMain3 {
 		String result = "";
 		
 		while (m.find()) {
-			System.out.println(m.group(1));
-			System.out.println(m.group(2));
+			System.out.println("g1:"+m.group(1));
+			System.out.println("g2:"+m.group(2));
 			result = fixDateBetween(m.group(1), true) + " AND "+ fixDateBetween(m.group(2), false);
 		}
 		
-		System.out.println(result);
+		System.out.println("fad: "+result);
 		
 		return result;
 	}
@@ -131,12 +137,12 @@ public class TalMain3 {
 		String result = arbre;
 		
 		if(isFirstOne){
-			result = result.replaceAll("jour = [0-9]{2} AND mois = [0-9]{2} AND annee = [0-9]{4}","to_date(jour || '-' || mois || '-' || annee, 'DD-MM-YYYY') BETWEEN to_date('$1-$2-$3', 'DD-MM-YYYY')");
+			result = result.replaceAll("jour = ([0-9]{2}) AND mois = ([0-9]{2}) AND annee = ([0-9]{4})","to_date(jour || '-' || mois || '-' || annee, 'DD-MM-YYYY') BETWEEN to_date('$1-$2-$3', 'DD-MM-YYYY')");
 		}else{
-			result = result.replaceAll("jour = [0-9]{2} AND mois = [0-9]{2} AND annee = [0-9]{4}","to_date('$1-$2-$3', 'DD-MM-YYYY')");
+			result = result.replaceAll("jour = ([0-9]{2}) AND mois = ([0-9]{2}) AND annee = ([0-9]{4})","to_date('$1-$2-$3', 'DD-MM-YYYY')");
 		}
 		
-		System.out.println(result);
+		System.out.println("fdb: "+result);
 		return result;
 	}
 	

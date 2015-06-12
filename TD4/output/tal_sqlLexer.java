@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-11 19:58:15
+// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 14:28:26
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -13,8 +13,8 @@ public class tal_sqlLexer extends Lexer {
 	public static final int ARTICLE=6;
 	public static final int CHAR=7;
 	public static final int COUNT=8;
-	public static final int DATE=9;
-	public static final int ENTRE=10;
+	public static final int ENTRE=9;
+	public static final int FULLDATE_DELIMITER=10;
 	public static final int JOUR=11;
 	public static final int MOIS=12;
 	public static final int MOT=13;
@@ -698,45 +698,19 @@ public class tal_sqlLexer extends Lexer {
 	}
 	// $ANTLR end "ANNEE"
 
-	// $ANTLR start "DATE"
-	public final void mDATE() throws RecognitionException {
+	// $ANTLR start "FULLDATE_DELIMITER"
+	public final void mFULLDATE_DELIMITER() throws RecognitionException {
 		try {
-			int _type = DATE;
+			int _type = FULLDATE_DELIMITER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:6: ( JOUR ( '/' ) ( '0' .. '9' ) ( '0' .. '9' ) ( '/' ) ANNEE )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:8: JOUR ( '/' ) ( '0' .. '9' ) ( '0' .. '9' ) ( '/' ) ANNEE
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:40:19: ( ( '-' ) )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:40:21: ( '-' )
 			{
-			mJOUR(); 
-
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:13: ( '/' )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:14: '/'
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:40:21: ( '-' )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:40:22: '-'
 			{
-			match('/'); 
+			match('-'); 
 			}
-
-			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:40: ( '/' )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:39:41: '/'
-			{
-			match('/'); 
-			}
-
-			mANNEE(); 
 
 			}
 
@@ -747,15 +721,15 @@ public class tal_sqlLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "DATE"
+	// $ANTLR end "FULLDATE_DELIMITER"
 
 	// $ANTLR start "ENTRE"
 	public final void mENTRE() throws RecognitionException {
 		try {
 			int _type = ENTRE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:42:7: ( 'entre' )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:42:9: 'entre'
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:43:7: ( 'entre' )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:43:9: 'entre'
 			{
 			match("entre"); 
 
@@ -775,7 +749,7 @@ public class tal_sqlLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:5: ( ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' ) | '\\n' )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:5: ( ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' ) | '\\n' )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='\t'||LA6_0=='\r'||LA6_0==' '||(LA6_0 >= 'd' && LA6_0 <= 'e')||LA6_0=='j'||(LA6_0 >= 'l' && LA6_0 <= 'm')||LA6_0=='q'||LA6_0=='t') ) {
@@ -793,9 +767,9 @@ public class tal_sqlLexer extends Lexer {
 
 			switch (alt6) {
 				case 1 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:7: ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:7: ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' )
 					{
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:7: ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' )
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:7: ( ' ' | '\\t' | '\\r' | 'je' | 'qui' | 'moi' | 'dont' | 't-il' | 'de' | 'des' | 'du' | 'en' | 'quel' | 'quels' | 'quelles' | 'le' | 'la' )
 					int alt5=17;
 					switch ( input.LA(1) ) {
 					case ' ':
@@ -976,116 +950,116 @@ public class tal_sqlLexer extends Lexer {
 					}
 					switch (alt5) {
 						case 1 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:8: ' '
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:8: ' '
 							{
 							match(' '); 
 							}
 							break;
 						case 2 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:13: '\\t'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:13: '\\t'
 							{
 							match('\t'); 
 							}
 							break;
 						case 3 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:20: '\\r'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:20: '\\r'
 							{
 							match('\r'); 
 							}
 							break;
 						case 4 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:27: 'je'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:27: 'je'
 							{
 							match("je"); 
 
 							}
 							break;
 						case 5 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:34: 'qui'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:34: 'qui'
 							{
 							match("qui"); 
 
 							}
 							break;
 						case 6 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:42: 'moi'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:42: 'moi'
 							{
 							match("moi"); 
 
 							}
 							break;
 						case 7 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:50: 'dont'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:50: 'dont'
 							{
 							match("dont"); 
 
 							}
 							break;
 						case 8 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:59: 't-il'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:59: 't-il'
 							{
 							match("t-il"); 
 
 							}
 							break;
 						case 9 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:68: 'de'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:68: 'de'
 							{
 							match("de"); 
 
 							}
 							break;
 						case 10 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:75: 'des'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:75: 'des'
 							{
 							match("des"); 
 
 							}
 							break;
 						case 11 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:84: 'du'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:84: 'du'
 							{
 							match("du"); 
 
 							}
 							break;
 						case 12 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:91: 'en'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:91: 'en'
 							{
 							match("en"); 
 
 							}
 							break;
 						case 13 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:98: 'quel'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:98: 'quel'
 							{
 							match("quel"); 
 
 							}
 							break;
 						case 14 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:107: 'quels'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:107: 'quels'
 							{
 							match("quels"); 
 
 							}
 							break;
 						case 15 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:117: 'quelles'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:117: 'quelles'
 							{
 							match("quelles"); 
 
 							}
 							break;
 						case 16 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:129: 'le'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:129: 'le'
 							{
 							match("le"); 
 
 							}
 							break;
 						case 17 :
-							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:136: 'la'
+							// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:136: 'la'
 							{
 							match("la"); 
 
@@ -1098,7 +1072,7 @@ public class tal_sqlLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:45:155: '\\n'
+					// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:46:155: '\\n'
 					{
 					match('\n'); 
 					}
@@ -1117,7 +1091,7 @@ public class tal_sqlLexer extends Lexer {
 	// $ANTLR start "CHAR"
 	public final void mCHAR() throws RecognitionException {
 		try {
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:51:4: ( 'A' .. 'Z' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:52:4: ( 'A' .. 'Z' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
 			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z')||(input.LA(1) >= '\u00C0' && input.LA(1) <= '\u00D6')||(input.LA(1) >= '\u00D8' && input.LA(1) <= '\u00F6')||(input.LA(1) >= '\u00F8' && input.LA(1) <= '\u02FF')||(input.LA(1) >= '\u0370' && input.LA(1) <= '\u037D')||(input.LA(1) >= '\u037F' && input.LA(1) <= '\u1FFF')||(input.LA(1) >= '\u200C' && input.LA(1) <= '\u200D')||(input.LA(1) >= '\u2070' && input.LA(1) <= '\u218F')||(input.LA(1) >= '\u2C00' && input.LA(1) <= '\u2FEF')||(input.LA(1) >= '\u3001' && input.LA(1) <= '\uD7FF')||(input.LA(1) >= '\uF900' && input.LA(1) <= '\uFDCF')||(input.LA(1) >= '\uFDF0' && input.LA(1) <= '\uFFFD') ) {
@@ -1142,12 +1116,12 @@ public class tal_sqlLexer extends Lexer {
 		try {
 			int _type = VAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:64:6: ( CHAR ( CHAR )+ )
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:64:7: CHAR ( CHAR )+
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:65:6: ( CHAR ( CHAR )+ )
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:65:7: CHAR ( CHAR )+
 			{
 			mCHAR(); 
 
-			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:64:12: ( CHAR )+
+			// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:65:12: ( CHAR )+
 			int cnt7=0;
 			loop7:
 			while (true) {
@@ -1193,7 +1167,7 @@ public class tal_sqlLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:8: ( SELECT | COUNT | ARTICLE | TITRE | RUBRIQUE | PAGE | AND | OR | POINT | MOT | JOUR | MOIS | ANNEE | DATE | ENTRE | WS | VAR )
+		// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:8: ( SELECT | COUNT | ARTICLE | TITRE | RUBRIQUE | PAGE | AND | OR | POINT | MOT | JOUR | MOIS | ANNEE | FULLDATE_DELIMITER | ENTRE | WS | VAR )
 		int alt8=17;
 		alt8 = dfa8.predict(input);
 		switch (alt8) {
@@ -1289,28 +1263,28 @@ public class tal_sqlLexer extends Lexer {
 				}
 				break;
 			case 14 :
-				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:84: DATE
+				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:84: FULLDATE_DELIMITER
 				{
-				mDATE(); 
+				mFULLDATE_DELIMITER(); 
 
 				}
 				break;
 			case 15 :
-				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:89: ENTRE
+				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:103: ENTRE
 				{
 				mENTRE(); 
 
 				}
 				break;
 			case 16 :
-				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:95: WS
+				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:109: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 17 :
-				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:98: VAR
+				// /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g:1:112: VAR
 				{
 				mVAR(); 
 
@@ -1323,21 +1297,21 @@ public class tal_sqlLexer extends Lexer {
 
 	protected DFA8 dfa8 = new DFA8(this);
 	static final String DFA8_eotS =
-		"\26\uffff\11\25\1\11\1\22\1\77\3\25\1\106\2\25\1\22\4\25\2\22\1\25\2\22"+
-		"\15\25\1\uffff\1\25\1\137\1\22\1\25\1\141\3\uffff\6\25\2\22\10\25\1\141"+
-		"\2\25\1\163\3\25\1\uffff\1\141\1\uffff\1\25\1\141\4\25\2\22\6\25\1\141"+
-		"\1\u0084\1\25\1\uffff\1\25\1\u0087\6\25\1\22\4\25\1\u0092\2\25\1\uffff"+
-		"\1\25\1\137\1\uffff\7\25\1\u009d\1\u0092\1\25\1\uffff\1\25\1\u00a0\1\25"+
-		"\4\141\2\25\1\22\1\uffff\1\137\1\141\1\uffff\1\u00a4\1\25\1\141\1\uffff"+
+		"\27\uffff\11\26\1\11\1\23\1\100\3\26\1\107\2\26\1\23\4\26\2\23\1\26\2"+
+		"\23\15\26\1\uffff\1\26\1\137\1\23\1\26\1\141\2\uffff\6\26\2\23\10\26\1"+
+		"\141\2\26\1\163\3\26\1\uffff\1\141\1\uffff\1\26\1\141\4\26\2\23\6\26\1"+
+		"\141\1\u0084\1\26\1\uffff\1\26\1\u0087\6\26\1\23\4\26\1\u0092\2\26\1\uffff"+
+		"\1\26\1\137\1\uffff\7\26\1\u009d\1\u0092\1\26\1\uffff\1\26\1\u00a0\1\26"+
+		"\4\141\2\26\1\23\1\uffff\1\137\1\141\1\uffff\1\u00a4\1\26\1\141\1\uffff"+
 		"\1\141";
 	static final String DFA8_eofS =
 		"\u00a6\uffff";
 	static final String DFA8_minS =
-		"\1\11\4\101\1\55\3\101\1\uffff\1\101\1\uffff\1\101\1\60\4\101\1\uffff"+
+		"\1\11\4\101\1\55\3\101\1\uffff\1\101\1\uffff\1\101\1\60\4\101\2\uffff"+
 		"\2\101\1\uffff\1\165\2\155\1\164\1\162\1\u00fb\1\164\1\142\1\147\3\101"+
-		"\1\164\2\151\1\57\1\156\1\151\1\101\1\166\1\160\1\143\1\156\2\101\1\145"+
+		"\1\164\2\151\1\60\1\156\1\151\1\101\1\166\1\160\1\143\1\156\2\101\1\145"+
 		"\2\101\1\154\1\142\1\164\1\142\1\145\2\151\1\164\2\162\1\145\1\154\1\162"+
-		"\1\uffff\1\157\2\101\1\163\1\101\3\uffff\1\166\1\154\1\162\1\164\1\145"+
+		"\1\uffff\1\157\2\101\1\163\1\101\2\uffff\1\166\1\154\1\162\1\164\1\145"+
 		"\1\164\2\101\1\154\1\157\1\151\1\145\1\162\1\155\1\143\1\154\1\101\1\145"+
 		"\1\151\1\101\2\145\1\142\1\uffff\1\101\1\uffff\1\151\1\101\1\154\1\151"+
 		"\1\145\1\155\2\101\1\151\1\145\1\156\1\145\1\142\1\154\2\101\1\161\1\uffff"+
@@ -1346,11 +1320,11 @@ public class tal_sqlLexer extends Lexer {
 		"\1\162\1\163\2\101\1\162\1\uffff\1\145\1\101\1\145\4\101\1\162\1\145\1"+
 		"\101\1\uffff\2\101\1\uffff\1\101\1\145\1\101\1\uffff\1\101";
 	static final String DFA8_maxS =
-		"\11\ufffd\1\uffff\1\ufffd\1\uffff\1\ufffd\1\71\4\ufffd\1\uffff\2\ufffd"+
+		"\11\ufffd\1\uffff\1\ufffd\1\uffff\1\ufffd\1\71\4\ufffd\2\uffff\2\ufffd"+
 		"\1\uffff\1\165\1\156\1\166\1\164\1\162\1\u00fb\1\164\1\142\1\162\3\ufffd"+
 		"\2\164\1\162\1\71\1\156\1\151\1\ufffd\1\166\1\160\1\143\1\156\2\ufffd"+
 		"\1\151\2\ufffd\1\154\1\142\1\164\1\142\1\145\2\151\1\164\2\162\1\145\1"+
-		"\154\1\162\1\uffff\1\157\2\ufffd\1\163\1\ufffd\3\uffff\1\166\1\156\1\162"+
+		"\154\1\162\1\uffff\1\157\2\ufffd\1\163\1\ufffd\2\uffff\1\166\1\156\1\162"+
 		"\1\164\1\145\1\164\2\ufffd\1\154\1\157\1\151\1\145\1\162\1\155\1\143\1"+
 		"\154\1\ufffd\1\145\1\151\1\ufffd\2\145\1\142\1\uffff\1\ufffd\1\uffff\1"+
 		"\151\1\ufffd\1\154\1\151\1\145\1\155\2\ufffd\1\151\1\145\1\156\1\145\1"+
@@ -1360,139 +1334,140 @@ public class tal_sqlLexer extends Lexer {
 		"\1\145\1\ufffd\1\145\4\ufffd\1\162\1\145\1\ufffd\1\uffff\2\ufffd\1\uffff"+
 		"\1\ufffd\1\145\1\ufffd\1\uffff\1\ufffd";
 	static final String DFA8_acceptS =
-		"\11\uffff\1\7\1\uffff\1\11\6\uffff\1\20\2\uffff\1\21\51\uffff\1\10\5\uffff"+
-		"\1\15\1\13\1\16\27\uffff\1\12\1\uffff\1\14\21\uffff\1\6\20\uffff\1\4\2"+
-		"\uffff\1\17\12\uffff\1\2\12\uffff\1\1\2\uffff\1\3\3\uffff\1\5\1\uffff";
+		"\11\uffff\1\7\1\uffff\1\11\6\uffff\1\16\1\20\2\uffff\1\21\51\uffff\1\10"+
+		"\5\uffff\1\15\1\13\27\uffff\1\12\1\uffff\1\14\21\uffff\1\6\20\uffff\1"+
+		"\4\2\uffff\1\17\12\uffff\1\2\12\uffff\1\1\2\uffff\1\3\3\uffff\1\5\1\uffff";
 	static final String DFA8_specialS =
 		"\u00a6\uffff}>";
 	static final String[] DFA8_transitionS = {
-			"\2\22\2\uffff\1\22\22\uffff\1\22\13\uffff\1\11\1\uffff\1\13\1\uffff\12"+
-			"\15\5\uffff\1\13\1\uffff\32\25\6\uffff\1\4\1\25\1\2\1\21\1\10\1\17\3"+
-			"\25\1\16\1\25\1\24\1\14\1\3\1\12\1\7\1\23\1\6\1\20\1\5\1\25\1\1\4\25"+
-			"\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff"+
-			"\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff"+
-			"\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e\25",
-			"\32\25\6\uffff\16\25\1\26\13\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\16\25\1\27\13\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\16\25\1\30\13\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\16\25\1\33\2\25\1\31\3\25\1\32\4\25\105\uffff\27\25\1"+
-			"\uffff\37\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff"+
-			"\2\25\142\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100"+
-			"\uffff\u04d0\25\40\uffff\u020e\25",
-			"\1\22\23\uffff\32\25\6\uffff\10\25\1\34\21\25\105\uffff\27\25\1\uffff"+
-			"\37\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25"+
-			"\142\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff"+
-			"\u04d0\25\40\uffff\u020e\25",
-			"\32\25\6\uffff\24\25\1\35\5\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\1\36\31\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208"+
-			"\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25"+
-			"\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\15\25\1\40\5\25\1\37\6\25\105\uffff\27\25\1\uffff\37"+
-			"\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142"+
-			"\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0"+
-			"\25\40\uffff\u020e\25",
+			"\2\23\2\uffff\1\23\22\uffff\1\23\13\uffff\1\11\1\22\1\13\1\uffff\12\15"+
+			"\5\uffff\1\13\1\uffff\32\26\6\uffff\1\4\1\26\1\2\1\21\1\10\1\17\3\26"+
+			"\1\16\1\26\1\25\1\14\1\3\1\12\1\7\1\24\1\6\1\20\1\5\1\26\1\1\4\26\105"+
+			"\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81"+
+			"\26\14\uffff\2\26\142\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff"+
+			"\26\u2100\uffff\u04d0\26\40\uffff\u020e\26",
+			"\32\26\6\uffff\16\26\1\27\13\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\16\26\1\30\13\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\16\26\1\31\13\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\16\26\1\34\2\26\1\32\3\26\1\33\4\26\105\uffff\27\26\1"+
+			"\uffff\37\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff"+
+			"\2\26\142\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100"+
+			"\uffff\u04d0\26\40\uffff\u020e\26",
+			"\1\23\23\uffff\32\26\6\uffff\10\26\1\35\21\26\105\uffff\27\26\1\uffff"+
+			"\37\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26"+
+			"\142\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff"+
+			"\u04d0\26\40\uffff\u020e\26",
+			"\32\26\6\uffff\24\26\1\36\5\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\1\37\31\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208"+
+			"\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26"+
+			"\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\15\26\1\41\5\26\1\40\6\26\105\uffff\27\26\1\uffff\37"+
+			"\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142"+
+			"\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0"+
+			"\26\40\uffff\u020e\26",
 			"",
-			"\32\25\6\uffff\2\25\1\42\21\25\1\41\5\25\105\uffff\27\25\1\uffff\37"+
-			"\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142"+
-			"\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0"+
-			"\25\40\uffff\u020e\25",
+			"\32\26\6\uffff\2\26\1\43\21\26\1\42\5\26\105\uffff\27\26\1\uffff\37"+
+			"\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142"+
+			"\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0"+
+			"\26\40\uffff\u020e\26",
 			"",
-			"\32\25\6\uffff\1\44\15\25\1\43\13\25\105\uffff\27\25\1\uffff\37\25\1"+
-			"\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff"+
-			"\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25"+
-			"\40\uffff\u020e\25",
-			"\12\45",
-			"\32\25\6\uffff\1\46\3\25\1\50\17\25\1\47\5\25\105\uffff\27\25\1\uffff"+
-			"\37\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25"+
-			"\142\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff"+
-			"\u04d0\25\40\uffff\u020e\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\21\25\1\51\15\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\4\25\1\52\25\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\4\25\1\55\11\25\1\54\5\25\1\56\5\25\105\uffff\27\25\1"+
-			"\uffff\21\25\1\53\15\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81"+
-			"\25\14\uffff\2\25\142\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff"+
-			"\25\u2100\uffff\u04d0\25\40\uffff\u020e\25",
+			"\32\26\6\uffff\1\45\15\26\1\44\13\26\105\uffff\27\26\1\uffff\37\26\1"+
+			"\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff"+
+			"\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26"+
+			"\40\uffff\u020e\26",
+			"\12\46",
+			"\32\26\6\uffff\1\47\3\26\1\51\17\26\1\50\5\26\105\uffff\27\26\1\uffff"+
+			"\37\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26"+
+			"\142\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff"+
+			"\u04d0\26\40\uffff\u020e\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\21\26\1\52\15\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\4\26\1\53\25\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\4\26\1\56\11\26\1\55\5\26\1\57\5\26\105\uffff\27\26\1"+
+			"\uffff\21\26\1\54\15\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81"+
+			"\26\14\uffff\2\26\142\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff"+
+			"\26\u2100\uffff\u04d0\26\40\uffff\u020e\26",
 			"",
-			"\32\25\6\uffff\24\25\1\57\5\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\1\61\3\25\1\60\25\25\105\uffff\27\25\1\uffff\37\25\1"+
-			"\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff"+
-			"\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25"+
-			"\40\uffff\u020e\25",
 			"",
-			"\1\62",
-			"\1\63\1\64",
-			"\1\65\10\uffff\1\66",
-			"\1\67",
+			"\32\26\6\uffff\24\26\1\60\5\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\1\62\3\26\1\61\25\26\105\uffff\27\26\1\uffff\37\26\1"+
+			"\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff"+
+			"\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26"+
+			"\40\uffff\u020e\26",
+			"",
+			"\1\63",
+			"\1\64\1\65",
+			"\1\66\10\uffff\1\67",
 			"\1\70",
 			"\1\71",
 			"\1\72",
 			"\1\73",
-			"\1\74\12\uffff\1\75",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\23\25\1\76\6\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\1\100",
-			"\1\102\12\uffff\1\101",
-			"\1\104\10\uffff\1\103",
-			"\1\107\12\105",
+			"\1\74",
+			"\1\75\12\uffff\1\76",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\23\26\1\77\6\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\1\101",
+			"\1\103\12\uffff\1\102",
+			"\1\105\10\uffff\1\104",
+			"\12\106",
 			"\1\110",
 			"\1\111",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\112",
 			"\1\113",
 			"\1\114",
 			"\1\115",
-			"\32\25\6\uffff\22\25\1\116\7\25\105\uffff\27\25\1\uffff\37\25\1\uffff"+
-			"\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120"+
-			"\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff"+
-			"\u020e\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\22\26\1\116\7\26\105\uffff\27\26\1\uffff\37\26\1\uffff"+
+			"\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120"+
+			"\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff"+
+			"\u020e\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\120\3\uffff\1\117",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\121",
 			"\1\122",
 			"\1\123",
@@ -1508,20 +1483,19 @@ public class tal_sqlLexer extends Lexer {
 			"\1\135",
 			"",
 			"\1\136",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\140",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
 			"",
 			"\1\142",
@@ -1530,14 +1504,14 @@ public class tal_sqlLexer extends Lexer {
 			"\1\146",
 			"\1\147",
 			"\1\150",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\151",
 			"\1\152",
 			"\1\153",
@@ -1546,89 +1520,89 @@ public class tal_sqlLexer extends Lexer {
 			"\1\156",
 			"\1\157",
 			"\1\160",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\161",
 			"\1\162",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\164",
 			"\1\165",
 			"\1\166",
 			"",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
 			"\1\167",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\170",
 			"\1\171",
 			"\1\172",
 			"\1\173",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\13\25\1\175\6\25\1\174\7\25\105\uffff\27\25\1\uffff\37"+
-			"\25\1\uffff\u0208\25\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142"+
-			"\uffff\u0120\25\u0a70\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0"+
-			"\25\40\uffff\u020e\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\13\26\1\175\6\26\1\174\7\26\105\uffff\27\26\1\uffff\37"+
+			"\26\1\uffff\u0208\26\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142"+
+			"\uffff\u0120\26\u0a70\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0"+
+			"\26\40\uffff\u020e\26",
 			"\1\176",
 			"\1\177",
 			"\1\u0080",
 			"\1\u0081",
 			"\1\u0082",
 			"\1\u0083",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u0085",
 			"",
 			"\1\u0086",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u0088",
 			"\1\u0089",
 			"\1\u008a",
 			"\1\u008b",
 			"\1\u008c",
 			"\1\u008d",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u008e",
 			"\1\u008f",
 			"\1\u0090",
 			"\1\u0091",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u0093",
 			"\1\u0094",
 			"",
 			"\1\u0095",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
 			"\1\u0096",
 			"\1\u0097",
@@ -1637,68 +1611,68 @@ public class tal_sqlLexer extends Lexer {
 			"\1\u009a",
 			"\1\u009b",
 			"\1\u009c",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u009e",
 			"",
 			"\1\u009f",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u00a1",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u00a2",
 			"\1\u00a3",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"\1\u00a5",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25",
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26",
 			"",
-			"\32\25\6\uffff\32\25\105\uffff\27\25\1\uffff\37\25\1\uffff\u0208\25"+
-			"\160\uffff\16\25\1\uffff\u1c81\25\14\uffff\2\25\142\uffff\u0120\25\u0a70"+
-			"\uffff\u03f0\25\21\uffff\ua7ff\25\u2100\uffff\u04d0\25\40\uffff\u020e"+
-			"\25"
+			"\32\26\6\uffff\32\26\105\uffff\27\26\1\uffff\37\26\1\uffff\u0208\26"+
+			"\160\uffff\16\26\1\uffff\u1c81\26\14\uffff\2\26\142\uffff\u0120\26\u0a70"+
+			"\uffff\u03f0\26\21\uffff\ua7ff\26\u2100\uffff\u04d0\26\40\uffff\u020e"+
+			"\26"
 	};
 
 	static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
@@ -1732,7 +1706,7 @@ public class tal_sqlLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( SELECT | COUNT | ARTICLE | TITRE | RUBRIQUE | PAGE | AND | OR | POINT | MOT | JOUR | MOIS | ANNEE | DATE | ENTRE | WS | VAR );";
+			return "1:1: Tokens : ( SELECT | COUNT | ARTICLE | TITRE | RUBRIQUE | PAGE | AND | OR | POINT | MOT | JOUR | MOIS | ANNEE | FULLDATE_DELIMITER | ENTRE | WS | VAR );";
 		}
 	}
 
