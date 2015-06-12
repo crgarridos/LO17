@@ -36,8 +36,6 @@ MOIS: 'janvier' | 'février' | 'mars' | 'avril' | 'mai' | 'juin' | 'juillet' | '
 ANNEE	:	('0'..'9')('0'..'9')('0'..'9')('0'..'9')
 ;
 
-DATE	:	JOUR ('/') ('0'..'9')('0'..'9') ('/') ANNEE
-;
 
 FULLDATE_DELIMITER:	('-')
 	;
@@ -135,14 +133,14 @@ requete returns [Arbre req_arbre = new Arbre("")]
 
 date returns [Arbre date_arbre = new Arbre("")] 
 @init {
-		Arbre fulldate_arbre;
+		Arbre fulldate_sub_arbre;
 	} : 
-		(a = fulldate 
+		(fulldate_a = fulldate 
 			{
-				fulldate_arbre = $a.fulldate_arbre;
-				date_arbre.ajouteFils(fulldate_arbre);
+				fulldate_sub_arbre = $fulldate_a.fulldate_arbre;
+				date_arbre.ajouteFils(fulldate_sub_arbre);
 			}
-			})
+			)
 		|(b = JOUR 
 			{
 				date_arbre.ajouteFils(new Arbre("jour = ",  b.getText()));
@@ -168,7 +166,7 @@ fulldate returns [Arbre fulldate_arbre = new Arbre("")] :
 			}
 		d2 = ANNEE
 			{
-				fulldate_arbre.ajouteFils(new Arbre("AND annee = ", d.getText()));
+				fulldate_arbre.ajouteFils(new Arbre("AND annee = ", d2.getText()));
 			}
 ;
 
