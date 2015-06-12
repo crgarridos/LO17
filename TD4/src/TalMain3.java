@@ -131,13 +131,9 @@ public class TalMain3 {
 		String result = arbre;
 		
 		if(isFirstOne){
-			result = result.replaceAll("jour = ","jour >=");
-			result = result.replaceAll("mois = ","mois >=");
-			result = result.replaceAll("annee = ","annee >=");
+			result = result.replaceAll("jour = [0-9]{2} AND mois = [0-9]{2} AND annee = [0-9]{4}","to_date(jour || '-' || mois || '-' || annee, 'DD-MM-YYYY') BETWEEN to_date('$1-$2-$3', 'DD-MM-YYYY')");
 		}else{
-			result = result.replaceAll("jour = ","jour <=");
-			result = result.replaceAll("mois = ","mois <=");
-			result = result.replaceAll("annee = ","annee <=");
+			result = result.replaceAll("jour = [0-9]{2} AND mois = [0-9]{2} AND annee = [0-9]{4}","to_date('$1-$2-$3', 'DD-MM-YYYY')");
 		}
 		
 		System.out.println(result);
