@@ -3668,6 +3668,7 @@ donnant	donnant
 donne	vouloir
 donnent	vouloir
 donner	vouloir
+donnez	vouloir
 donnera	donnera
 donnet	donnet
 donneurs	donneurs
@@ -8922,10 +8923,10 @@ parisienne	parisienne
 paristech	paristech
 parkinson	parkinson
 parkinsoniens	parkinsoniens
-parle	parler
-parlent	parler
-parler	parler
-parlera	parler
+parle	contenir
+parlent	contenir
+parler	contenir
+parlera	contenir
 parlez	parlez
 parlé	parlé
 parmi	parmi
