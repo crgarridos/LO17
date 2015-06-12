@@ -89,18 +89,18 @@ requete returns [Arbre req_arbre = new Arbre("")]
 		} )
 		(ARTICLE
 			{
-				req_arbre.ajouteFils(new Arbre("","fichier"));
+				req_arbre.ajouteFils(new Arbre("","t.fichier"));
 			}
 		 | PAGE
 			{
-				req_arbre.ajouteFils(new Arbre("","numero"));
+				req_arbre.ajouteFils(new Arbre("","t.numero"));
 			})
-		(TITRE & (MOT)+ {
-				req_arbre.ajouteFils(new Arbre("","from titre"));
+		(|(TITRE & (MOT)+ {
+				req_arbre.ajouteFils(new Arbre("","from titre t"));
 			}
 		|(MOT)+
 			{
-				req_arbre.ajouteFils(new Arbre("","from titretexte"));
+				req_arbre.ajouteFils(new Arbre("","from titretexte t"));
 			})
 			
 		ps = params 
@@ -108,17 +108,17 @@ requete returns [Arbre req_arbre = new Arbre("")]
 				req_arbre.ajouteFils(new Arbre("","where"));
 				ps_arbre = $ps.les_pars_arbre;
 				req_arbre.ajouteFils(ps_arbre);
-			}
+			})
 			
 		(|pdate = date
 			{
-				req_arbre.ajouteFils(new Arbre("","from date"));
+				req_arbre.ajouteFils(new Arbre("","from date t WHERE"));
 				pdate_arbre = $pdate.date_arbre;
 				req_arbre.ajouteFils(pdate_arbre);
 			}
 		|(ENTRE & pdate11 = date & AND
 			{
-				req_arbre.ajouteFils(new Arbre("","from date AND"));
+				req_arbre.ajouteFils(new Arbre("","from date t WHERE"));
 				pdate_arbre2 = $pdate11.date_arbre;
 				req_arbre.ajouteFils(pdate_arbre2);
 			}
@@ -143,15 +143,15 @@ date returns [Arbre date_arbre = new Arbre("")]
 			)
 		|(b = JOUR 
 			{
-				date_arbre.ajouteFils(new Arbre("jour = ",  b.getText()));
+				date_arbre.ajouteFils(new Arbre("jour = ",  "'"+b.getText()+"'"));
 			} 
 		| c = MOIS
 			{
-				date_arbre.ajouteFils(new Arbre("mois = ", c.getText()));
+				date_arbre.ajouteFils(new Arbre("mois = ", "'"+c.getText()+"'"));
 			}
 		| d =ANNEE
 			{
-				date_arbre.ajouteFils(new Arbre("annee = ", d.getText()));
+				date_arbre.ajouteFils(new Arbre("annee = ", "'"+d.getText()+"'"));
 			})+
 ;
 
