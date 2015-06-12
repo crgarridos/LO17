@@ -174,15 +174,15 @@ date returns [Arbre date_arbre = new Arbre("")]
 fulldate returns [Arbre fulldate_arbre = new Arbre("")] :
 		b2 = JOUR & FULLDATE_DELIMITER
 			{
-				fulldate_arbre.ajouteFils(new Arbre("jour = ",  b2.getText()));
+				fulldate_arbre.ajouteFils(new Arbre("jour = ",  "'"+b2.getText()+"'"));
 			} 
 		c2 = JOUR & FULLDATE_DELIMITER
 			{
-				fulldate_arbre.ajouteFils(new Arbre("AND mois = ", c2.getText()));
+				fulldate_arbre.ajouteFils(new Arbre("AND mois = ", "'"+c2.getText()+"'"));
 			}
 		d2 = ANNEE
 			{
-				fulldate_arbre.ajouteFils(new Arbre("AND annee = ", d2.getText()));
+				fulldate_arbre.ajouteFils(new Arbre("AND annee = ", "'"+d2.getText()+"'"));
 			}
 ;
 

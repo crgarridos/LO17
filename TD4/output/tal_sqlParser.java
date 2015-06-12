@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 15:49:02
+// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 16:15:05
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -654,16 +654,16 @@ public class tal_sqlParser extends Parser {
 			b2=(Token)match(input,JOUR,FOLLOW_JOUR_in_fulldate819); 
 			match(input,FULLDATE_DELIMITER,FOLLOW_FULLDATE_DELIMITER_in_fulldate822); 
 
-							fulldate_arbre.ajouteFils(new Arbre("jour = ",  b2.getText()));
+							fulldate_arbre.ajouteFils(new Arbre("jour = ",  "'"+b2.getText()+"'"));
 						
 			c2=(Token)match(input,JOUR,FOLLOW_JOUR_in_fulldate836); 
 			match(input,FULLDATE_DELIMITER,FOLLOW_FULLDATE_DELIMITER_in_fulldate839); 
 
-							fulldate_arbre.ajouteFils(new Arbre("AND mois = ", c2.getText()));
+							fulldate_arbre.ajouteFils(new Arbre("AND mois = ", "'"+c2.getText()+"'"));
 						
 			d2=(Token)match(input,ANNEE,FOLLOW_ANNEE_in_fulldate852); 
 
-							fulldate_arbre.ajouteFils(new Arbre("AND annee = ", d2.getText()));
+							fulldate_arbre.ajouteFils(new Arbre("AND annee = ", "'"+d2.getText()+"'"));
 						
 			}
 

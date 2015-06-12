@@ -262,6 +262,8 @@ développée
 développés
 eau
 ecole
+écrit
+écrits
 effectuer
 effet
 effets
@@ -542,6 +544,7 @@ outils
 outre
 ouvrage
 par
+parus
 parallèlement
 parce
 parfaitement
@@ -673,6 +676,7 @@ quasiment
 quatre
 que
 quel
+quels
 quelle
 quelque
 quelques
@@ -786,8 +790,6 @@ succès
 sud
 suite
 suivi
-sujet
-sujets
 supérieur
 supérieure
 sur
