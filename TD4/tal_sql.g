@@ -118,7 +118,7 @@ requete returns [Arbre req_arbre = new Arbre("")]
 			}
 		|(ENTRE & pdate11 = date & AND
 			{
-				req_arbre.ajouteFils(new Arbre("","from date"));
+				req_arbre.ajouteFils(new Arbre("","from date AND"));
 				pdate_arbre2 = $pdate11.date_arbre;
 				req_arbre.ajouteFils(pdate_arbre2);
 			}

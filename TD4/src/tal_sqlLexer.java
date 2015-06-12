@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 14:28:26
+// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 14:52:48
 
 import org.antlr.runtime.*;
 import java.util.Stack;

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 14:28:25
+// $ANTLR 3.5.1 /volsme/users/lo17p016/Documents/INDEX/LO17/TD4/tal_sql.g 2015-06-12 14:52:48
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -402,7 +402,7 @@ public class tal_sqlParser extends Parser {
 
 					match(input,AND,FOLLOW_AND_in_requete633); 
 
-									req_arbre.ajouteFils(new Arbre("","from date"));
+									req_arbre.ajouteFils(new Arbre("","from date AND"));
 									pdate_arbre2 = pdate11;
 									req_arbre.ajouteFils(pdate_arbre2);
 								
