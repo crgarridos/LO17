@@ -1,9 +1,11 @@
 import java.io.StringReader;
+import java.text.Normalizer;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 
 
@@ -25,6 +27,7 @@ public class TalMain3 {
 	*/
 
 	public static void main(String[] args) {
+		System.out.println(replaceAccents("àáeéû"));
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Texte : ");
 		String s = scanner.nextLine();
@@ -258,5 +261,23 @@ public class TalMain3 {
 		return result;
 	}
 
+	
+	public static String replaceAccents(String s){
+	    s = s.replaceAll("[èéêë]","e");
+	    s = s.replaceAll("[ûù]","u");
+	    s = s.replaceAll("[ïî]","i");
+	    s = s.replaceAll("[àâá]","a");
+	    s = s.replaceAll("ô","o");
+
+	    s = s.replaceAll("[ÈÉÊË]","E");
+	    s = s.replaceAll("[ÛÙ]","U");
+	    s = s.replaceAll("[ÏÎ]","I");
+	    s = s.replaceAll("[ÀÂÁ]","A");
+	    s = s.replaceAll("Ô","O");
+	    return s;
+//		return AsciiUtils.convertNonAscii(s);
+//		return Normalizer.normalize("àèé", Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+
+	}
 
 }

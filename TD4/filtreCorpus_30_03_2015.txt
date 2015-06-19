@@ -1108,7 +1108,6 @@ augmentée	augment
 augsburg	augsburg
 auguste	auguste
 aujourd	aujourd
-auo	auo
 aupalesens	aupalesens
 auparavant	auparavant
 auprès	auprès
@@ -4149,7 +4148,6 @@ eco	eco
 ecolab	ecolab
 ecole	ecole
 ecoles	ecoles
-ecologie	ecolog
 ecology	ecolog
 economic	econom
 economie	econom
@@ -6381,7 +6379,6 @@ injectée	inject
 injustifiées	injustifiées
 inlandsis	inla
 inlassablement	inla
-inn	inn
 innobio	innobio
 innocuité	innocuité
 innoecho	innoecho
@@ -8927,8 +8924,7 @@ parle	contenir
 parlent	contenir
 parler	contenir
 parlera	contenir
-parlez	parlez
-parlé	parlé
+parlez	contenir
 parmi	parmi
 paroi	paroi
 parois	parois
@@ -10471,6 +10467,8 @@ recueillir	recueilli
 recuites	recuites
 recul	recul
 reculées	reculées
+recuperer	vouloir
+recupere	vouloir
 recyclable	recycl
 recyclage	recycl
 recyclent	recycl
@@ -12545,6 +12543,7 @@ traitantes	traitan
 traite	traite
 traitement	traitement
 traitements	traitements
+traitent	contenir
 traiter	traiter
 traitera	traitera
 traiteront	traiteront
@@ -13416,11 +13415,11 @@ zérodur	zérodur
 écoles	écoles
 écoliers	écoliers
 écolo	écolo
-écologie	écologi
-écologique	écologi
-écologiques	écologi
-écologiste	écologi
-écologistes	écologi
+écologie	écolog
+écologique	écolog
+écologiques	écolog
+écologiste	écolog
+écologistes	écolog
 économe	économ
 économes	économ
 économie	économ
@@ -13444,8 +13443,6 @@ zérodur	zérodur
 écouter	écouter
 écran	écran
 écrans	écrans
-écrire	écrire
-écrit	écrit
 écriture	écriture
 écrivain	écrivain
 écroule	écroule

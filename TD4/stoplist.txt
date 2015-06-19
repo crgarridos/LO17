@@ -51,6 +51,7 @@ assurer
 atteindre
 au
 augmenter
+aui
 aujourd
 auprès
 auquel
@@ -129,7 +130,6 @@ choix
 ci
 cinq
 clients
-climat
 climatique
 climatiques
 cnrs
@@ -262,6 +262,7 @@ développée
 développés
 eau
 ecole
+ecrit
 écrit
 écrits
 effectuer
