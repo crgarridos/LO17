@@ -3671,9 +3671,6 @@ donnez	vouloir
 donnera	donnera
 donnet	donnet
 donneurs	donneurs
-donné	donné
-donnée	donnée
-données	données
 donnés	donnés
 dopage	dopage
 dopamine	dopamine
@@ -7848,7 +7845,6 @@ moelle	moelle
 mohamed	moham
 mohammad	moham
 moho	moho
-moi	moi
 moindre	moindre
 moindres	moindres
 moins	moins
